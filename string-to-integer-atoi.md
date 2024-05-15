@@ -772,23 +772,6 @@ impl Solution {
 // Space Complexity: O(1)
 ```
 
-### Racket
-
-```racket
-(define/contract (my-atoi s)
-  (-> string? exact-integer?)
-  (define MAX-INT 2147483647)
-  (define MIN-INT -2147483648)
-  
-  (define n (string-length s))
-  (define i (let loop ((idx 0))
-              (if (and (< idx n) (char-whitespace? (string-ref s idx)))
-                  (loop (+ idx 1))
-                  idx)))
-  
-  (if (= i n) 0
-      (let* ((sign (if (or (char=? (string-ref s i) #\-) (char=? (string-ref s i) #\+)) 
-                       (if (char=? (string-ref s i) #\-) -1 
 ### Closing Statement
 
 **Interviewer:** That concludes our discussion on the `myAtoi` function problem. You did a great job walking through the process of developing a brute-force solution and then refining it to ensure it's efficient. Your code for each language is well-structured and handles edge cases effectively. The time complexity of O(n) and space complexity of O(1) are optimal for this problem, as any string manipulation inherently requires a pass through the input.
