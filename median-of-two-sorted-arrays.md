@@ -545,6 +545,12 @@ class Solution {
                 }
                 
                 return (maxOfLeft + minOfRight) / 2.0
+            }
+        }
+        return 0.0
+    }
+}
+```
            
 ### Closing Statement
 
