@@ -729,32 +729,6 @@ impl Solution {
 }
 ```
 
-### Racket
-
-```racket
-; Definition for singly-linked list:
-
-; val : integer?
-; next : (or/c list-node? #f)
-(struct list-node
-  (val next) #:mutable #:transparent)
-
-; constructor
-(define (make-list-node [val 0])
-  (list-node val #f))
-
-(define/contract (add-two-numbers l1 l2)
-  (-> (or/c list-node? #f) (or/c list-node? #f) (or/c list-node? #f))
-  (let ([dummy (make-list-node)]
-        [current null]
-        [carry 0])
-    (set! current dummy)
-    (let loop ([l1 l1] [l2 l2] [carry carry])
-      (if (or l1 l2 (not (= carry 0)))
-          (let ([sum (+ carry 
-                         (if l1 (list-node-val l1) 0) 
-                         (if l2 (list-node-val l2) 0))])
-            (let ([node (make-list
 ### Closing Statement
 
 **Interviewer**: Excellent job! You've demonstrated a clear understanding of linked list operations and provided an optimal solution for adding two numbers represented by linked lists in reverse order across multiple programming languages. The approaches you used for handle carry-over and edge cases effectively. Your implementations were efficient, with a time complexity of O(max(m, n)) and a space complexity of O(max(m, n)), which are well-suited for the problem constraints. 
