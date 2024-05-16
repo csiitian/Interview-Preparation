@@ -558,7 +558,7 @@ convert_helper(C, {Rows, CurrentRow, GoingDown}) ->
     {NewRows, NewCurrentRow, not GoingDown}.
 ```
 
-### Elixir
+<!-- ### Elixir
 
 ```elixir
 defmodule Solution do
@@ -582,7 +582,9 @@ defmodule Solution do
     end
   end
 end
-```
+``` -->
+
+
 ### Closing Statement
 
 Thank you for walking through this problem with me. We discussed the formulation of the zigzag conversion, explored an initial brute force solution, and optimized it using various programming languages while maintaining time complexity at O(n) and space complexity at O(n). This exercise sharpened our understanding of string manipulation and iterative logic, which often finds applications in real-world problem-solving scenarios. Developing solutions across different languages also illustrated the versatility and adaptability required for technical interviews.
