@@ -660,7 +660,6 @@ end
 ```
 
 
-
 ### Closing Statement
 
 In this discussion, we explored the problem of checking whether a given binary tree is symmetric around its center. We started by thoroughly understanding the problem from both an interviewer's and interviewee's perspective. We discussed an initial brute force recursive approach to compare the left and right subtrees of the tree. We analyzed the time and space complexities of this approach and then moved on to optimize it further.
