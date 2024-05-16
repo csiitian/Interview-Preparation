@@ -558,32 +558,6 @@ convert_helper(C, {Rows, CurrentRow, GoingDown}) ->
     {NewRows, NewCurrentRow, not GoingDown}.
 ```
 
-<!-- ### Elixir
-
-```elixir
-defmodule Solution do
-  @spec convert(s :: String.t(), num_rows :: integer) :: String.t()
-  def convert(s, num_rows) do
-    if num_rows == 1 or num_rows >= String.length(s) do
-      s
-    else
-      rows = String.duplicate("", min(num_rows, String.length(s)))
-      {{rows, 0}, _} =
-        s
-        |> String.graphemes()
-        |> Enum.reduce({rows, 0, false}, fn char, {rows, current_row, going_down} ->
-          new_rows = List.update_at(rows, current_row, &(&1 <> char))
-          going_down = if current_row == 0 or current_row == num_rows - 1, do: not going_down, else: going_down
-          new_current_row = if going_down, do: current_row + 1, else: current_row - 1
-          {new_rows, new_current_row, going_down}
-        end)
-
-      Enum.join(rows)
-    end
-  end
-end
-``` -->
-
 
 ### Closing Statement
 
