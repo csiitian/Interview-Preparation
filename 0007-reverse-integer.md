@@ -496,6 +496,8 @@ end
 ```
 
 This list covers a variety of popular programming languages with the integer reversal solution while ensuring the constraints of 32-bit signed integers are respected and overflow checked appropriately.
+
+
 ### Closing Statement
 
 **Interviewer:** We've successfully discussed and implemented an efficient solution to the problem of reversing the digits of a signed 32-bit integer, taking into account potential overflows. Your approach to initially considering a brute force method and then optimizing to a more efficient solution using digit manipulation was well thought out. You demonstrated a clear understanding of time and space complexities and adapted the algorithm to multiple programming languages effectively.

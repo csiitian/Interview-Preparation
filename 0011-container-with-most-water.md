@@ -537,6 +537,8 @@ end
 ```
 - **Time Complexity:** O(n)
 - **Space Complexity:** O(1)
+
+
 ### Closing Statement
 
 In our discussion, we tackled the problem of finding the maximum area of water a container can store formed by two vertical lines on an array. We started with a brute force approach, which has a time complexity of \(O(n^2)\) and concluded that it wasn't efficient for larger inputs. Moving on, we optimized our solution using the two-pointer technique, reducing the time complexity to \(O(n)\) while maintaining a space complexity of \(O(1)\). This approach allowed us to efficiently solve the problem within the constraints provided.

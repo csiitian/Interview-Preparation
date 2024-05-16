@@ -551,6 +551,7 @@ end
 ```
 
 If you have any more questions or need further adjustments, feel free to ask!
+
 ### Closing Statement
 
 Great job! We've discussed the problem of finding the longest common prefix among an array of strings. We started with understanding the brute force approach, moving on to a more efficient vertical scanning technique. Throughout the discussion, we implemented the solution in multiple programming languages and analyzed their time and space complexities.
