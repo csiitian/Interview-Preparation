@@ -1,194 +1,157 @@
 ### Interviewer and Interviewee Discussion
 
-**Interviewer:** Let's discuss the problem presented. You need to calculate the exclusive time of each function given their start and end log entries. Each function starts when an entry "function_id:start:timestamp" appears and ends when an entry "function_id:end:timestamp" appears. Functions can also be nested. How would you approach this problem?
+**Interviewer**: Let's start by discussing how we might approach solving this problem. Could you explain what the problem is asking?
 
-**Interviewee:** First, let's understand that we need to account for nested function calls. When a function starts another function, the time for the first function is paused. We can utilize the call stack behavior where functions are stacked when they start and popped when they end. By maintaining a stack, we can track the execution order and compute the times appropriately.
+**Interviewee**: Sure. We have multiple function calls logged with their start and end times. The logs are ordered, and we need to calculate the exclusive time that each function spends executing. The exclusive time is the total time a function spends executing minus the time spent in nested function calls.
 
-**Interviewer:** That sounds reasonable. Can you outline how a brute force approach might work first?
+**Interviewer**: Exactly. How do you think we can approach solving this problem? What's the simplest method that comes to mind?
 
-**Interviewee:** Sure. The brute force approach would involve the following steps:
+**Interviewee**: The simplest approach would be a brute force method. We can iterate through the logs and maintain a stack to simulate the function calls. For each log, we can check if it's a "start" or "end" log and update our time counters accordingly.
 
-1. **Parse Logs:** Split each log entry to extract the function ID, action (start or end), and the timestamp.
-2. **Track Execution Time:**
-   - Use a stack to keep track of the current function being executed.
-   - When a "start" log is encountered, push the function ID onto the stack.
-   - When an "end" log is encountered:
-     - Pop the function ID from the top of the stack.
-     - Calculate the duration the function ran and add it to the total time for that function.
-     - Also account for nested durations.
-3. **Data Structures:**
-   - Use a list to store the total execution time for each function.
-   - A stack to maintain the order of function calls.
+### Initial Brute Force Approach
 
-### Brute Force Approach
+**Interviewer**: Okay, let's discuss the brute force method in a bit more detail. How would this work?
 
-```python
-def exclusiveTime(n, logs):
-    # Initialize the result list to store the exclusive times
-    exclusive_times = [0] * n
-    # Use a stack to track function calls
-    stack = []
-    # Previous timestamp to calculate duration
-    previous_time = 0
-    
-    for log in logs:
-        # Split the log into its components
-        func_id, action, timestamp = log.split(':')
-        func_id, timestamp = int(func_id), int(timestamp)
-        
-        if action == "start":
-            if stack:
-                # Update the exclusive time of the function at the top of the stack
-                exclusive_times[stack[-1]] += timestamp - previous_time
-            # Push the new function onto the stack
-            stack.append(func_id)
-            # Update the previous time to current
-            previous_time = timestamp
-        else:  # action == "end"
-            # Pop the function from the stack
-            exclusive_times[stack.pop()] += timestamp - previous_time + 1
-            # Update the previous time to the next timestamp
-            previous_time = timestamp + 1
-            
-    return exclusive_times
+**Interviewee**: We would use a stack to track the active functions. Here's how we can do it:
+1. Initialize an array `result` of size `n` with all zeros to store the exclusive time of each function.
+2. Initialize an empty stack and a variable `prev_time` to keep track of the previous timestamp.
+3. Loop through each log:
+   - If it's a "start" log, and the stack is not empty, update the exclusive time of the function at the top of the stack by adding the difference between the current timestamp and `prev_time`. Then, push the current function onto the stack.
+   - If it's an "end" log, update the exclusive time of the function at the top of the stack by adding the difference between the current timestamp and `prev_time` + 1. Pop the function from the stack.
+   - Update `prev_time` to the current timestamp from the log.
+
+### Time and Space Complexity Analysis
+
+**Interviewer**: Great! Let's analyze the time and space complexity of this approach.
+
+**Interviewee**:
+- **Time Complexity**: The time complexity is O(m), where `m` is the number of logs. We iterate through each log exactly once.
+- **Space Complexity**: The space complexity is O(n + m). We need `O(n)` space for the `result` array and `O(m)` space for the stack.
+
+**Interviewer**: Good. Now, can we optimize this approach further? 
+
+### Optimized Approach Using Stack
+
+**Interviewee**: The brute force method already uses a stack, which is actually an efficient data structure for this problem since we need to keep track of active function calls. I think the current approach is already fairly optimized. But we can ensure clarity by drawing it out.
+
+**Interviewer**: Sure, let's visualize how the stack changes with an example.
+
+### Drawing Explanation
+
+Consider the input:
+\[ "0:start:0", "1:start:2", "1:end:5", "0:end:6" \]
+
+1. **Initial State**:
+   - `result = [0, 0]`
+   - `stack = []`
+   - `prev_time = 0`
+
+2. **Process "0:start:0"**:
+   - Current log is "0:start:0"
+   - Stack: `[0]`
+   - Prev_time: `0`
+   
+3. **Process "1:start:2"**:
+   - Update `result[0] += 2 - 0 = 2`
+   - Stack: `[0, 1]`
+   - Prev_time: `2`
+   
+4. **Process "1:end:5"**:
+   - Update `result[1] += 5 - 2 + 1 = 4`
+   - Stack: `[0]`
+   - Prev_time: `5`
+   
+5. **Process "0:end:6"**:
+   - Update `result[0] += 6 - 5 + 1 = 1`
+   - Stack: `[]`
+   - End loop
+
+### Final Output Calculation:
+   - `result = [3, 4]`
+
+Here's a visual representation of the stack operations:
+
+```
+Time 0   1   2   3   4   5   6
+Stack |0| |0|1| |0|1| |0| |0|  |
+Result  0   2     2     2    3 
+         0     0     4          4
+
+Function calls:
+- Function 0 starts at time 0
+- Function 1 starts at time 2
+- Function 1 ends at time 5
+- Function 0 ends at time 6
 ```
 
-**Time Complexity:**
-- The time complexity is O(L), where L is the length of the logs. This is because we iterate over the logs exactly once.
+The final `result` array `[3, 4]` reflects the exclusive time each function spent executing.
 
-**Space Complexity:**
-- The space complexity is O(n + k), where n is the number of functions (for the result list) and k is the maximum depth of the call stack (for the stack). Given the problem constraints, both n and k are at most 100.
-
-**Interviewer:** This approach looks good and efficient. Can we consider another data structure for the stack, or further optimize knowing the constraints?
-
-**Interviewee:** Given that in this problem, n and the depth of recursion are reasonably small (both under 100), the stack-based solution we discussed is already quite efficient and straightforward. I am not sure if another data structure would significantly optimize it further given the constraints.
-
-Here is a visualization for understanding:
-
-### Visualization
-
-Let's consider the example: `logs = ["0:start:0","1:start:2","1:end:5","0:end:6"]`
-
-#### Step-by-Step Execution:
-1. **Input Logs:**
-   ```
-   logs = ["0:start:0","1:start:2","1:end:5","0:end:6"]
-   ```
-
-2. **Initialize:**
-   ```python
-   exclusive_times = [0, 0]
-   stack = []
-   previous_time = 0
-   ```
-
-3. **Processing each log:**
-   - **Log:** `"0:start:0"`
-     ```
-     Stack: [0]
-     Previous_time: 0
-     ```
-   - **Log:** `"1:start:2"`
-     ```
-     Update exclusive time: exclusive_times[0] += 2 - 0 = 2
-     Stack: [0, 1]
-     Previous_time: 2
-     ```
-   - **Log:** `"1:end:5"`
-     ```
-     Exclusive time before pop: exclusive_times[1] += 5 - 2 + 1 = 4
-     Stack: [0]
-     Previous_time: 6
-     ```
-   - **Log:** `"0:end:6"`
-     ```
-     Final exclusive time: exclusive_times[0] += 6 - 6 + 1 = 3
-     Stack: []
-     ```
-
-In the end:
-```python
-exclusive_times = [3, 4]
-```
-
-These steps ensure we precisely account for the time intervals and handle nested calls correctly by using the stack and updating exclusive times accordingly. 
-
-This approach gives a clear understanding of how functions are managed and how their execution time is calculated step-by-step.
-Certainly! Below are the implementations for each of the provided languages. The implementations follow the approach we discussed earlier, utilizing a stack to manage the function calls and calculate the exclusive times.
+**Interviewer**: Excellent. This optimized approach is clear and efficient!
+Let's write the code for each of the languages mentioned with proper method definitions.
 
 ### C++
-
 ```cpp
-#include <vector>
-#include <string>
-#include <stack>
-using namespace std;
-
 class Solution {
 public:
     vector<int> exclusiveTime(int n, vector<string>& logs) {
-        vector<int> exclusive_times(n, 0);
-        stack<int> stack;
-        int previous_time = 0;
-
-        for (const auto& log : logs) {
+        vector<int> result(n, 0);
+        stack<int> s;
+        int prev_time = 0;
+        for (const string& log : logs) {
             int pos1 = log.find(':');
             int pos2 = log.find(':', pos1 + 1);
-            int func_id = stoi(log.substr(0, pos1));
-            string action = log.substr(pos1 + 1, pos2 - pos1 - 1);
+            int id = stoi(log.substr(0, pos1));
+            string type = log.substr(pos1 + 1, pos2 - pos1 - 1);
             int timestamp = stoi(log.substr(pos2 + 1));
-
-            if (action == "start") {
-                if (!stack.empty())
-                    exclusive_times[stack.top()] += timestamp - previous_time;
-                stack.push(func_id);
-                previous_time = timestamp;
-            } else { // action == "end"
-                exclusive_times[stack.top()] += timestamp - previous_time + 1;
-                stack.pop();
-                previous_time = timestamp + 1;
+            
+            if (type == "start") {
+                if (!s.empty()) {
+                    result[s.top()] += timestamp - prev_time;
+                }
+                s.push(id);
+                prev_time = timestamp;
+            } else {
+                result[s.top()] += timestamp - prev_time + 1;
+                s.pop();
+                prev_time = timestamp + 1;
             }
         }
-        return exclusive_times;
+        return result;
     }
 };
 ```
 
 ### Java
-
 ```java
-import java.util.*;
-
 class Solution {
     public int[] exclusiveTime(int n, List<String> logs) {
-        int[] exclusive_times = new int[n];
+        int[] result = new int[n];
         Stack<Integer> stack = new Stack<>();
-        int previous_time = 0;
-
+        int prev_time = 0;
         for (String log : logs) {
             String[] parts = log.split(":");
-            int func_id = Integer.parseInt(parts[0]);
-            String action = parts[1];
+            int id = Integer.parseInt(parts[0]);
+            String type = parts[1];
             int timestamp = Integer.parseInt(parts[2]);
-
-            if (action.equals("start")) {
+            
+            if (type.equals("start")) {
                 if (!stack.isEmpty()) {
-                    exclusive_times[stack.peek()] += timestamp - previous_time;
+                    result[stack.peek()] += timestamp - prev_time;
                 }
-                stack.push(func_id);
-                previous_time = timestamp;
+                stack.push(id);
+                prev_time = timestamp;
             } else {
-                exclusive_times[stack.pop()] += timestamp - previous_time + 1;
-                previous_time = timestamp + 1;
+                result[stack.peek()] += timestamp - prev_time + 1;
+                stack.pop();
+                prev_time = timestamp + 1;
             }
         }
-        return exclusive_times;
+        return result;
     }
 }
 ```
 
 ### Python
-
 ```python
 class Solution(object):
     def exclusiveTime(self, n, logs):
@@ -197,123 +160,120 @@ class Solution(object):
         :type logs: List[str]
         :rtype: List[int]
         """
-        exclusive_times = [0] * n
+        result = [0] * n
         stack = []
-        previous_time = 0
-
+        prev_time = 0
         for log in logs:
-            func_id, action, timestamp = log.split(':')
-            func_id, timestamp = int(func_id), int(timestamp)
-
-            if action == "start":
+            function_id, type, timestamp = log.split(':')
+            function_id, timestamp = int(function_id), int(timestamp)
+            
+            if type == "start":
                 if stack:
-                    exclusive_times[stack[-1]] += timestamp - previous_time
-                stack.append(func_id)
-                previous_time = timestamp
-            else:  # action == "end"
-                exclusive_times[stack.pop()] += timestamp - previous_time + 1
-                previous_time = timestamp + 1
-
-        return exclusive_times
+                    result[stack[-1]] += timestamp - prev_time
+                stack.append(function_id)
+                prev_time = timestamp
+            else:
+                result[stack[-1]] += timestamp - prev_time + 1
+                stack.pop()
+                prev_time = timestamp + 1
+        
+        return result
 ```
 
 ### Python3
-
 ```python
 class Solution:
     def exclusiveTime(self, n: int, logs: List[str]) -> List[int]:
-        exclusive_times = [0] * n
+        result = [0] * n
         stack = []
-        previous_time = 0
-
+        prev_time = 0
         for log in logs:
-            func_id, action, timestamp = log.split(':')
-            func_id, timestamp = int(func_id), int(timestamp)
-
-            if action == "start":
+            function_id, type, timestamp = log.split(':')
+            function_id, timestamp = int(function_id), int(timestamp)
+            
+            if type == "start":
                 if stack:
-                    exclusive_times[stack[-1]] += timestamp - previous_time
-                stack.append(func_id)
-                previous_time = timestamp
-            else:  # action == "end"
-                exclusive_times[stack.pop()] += timestamp - previous_time + 1
-                previous_time = timestamp + 1
-
-        return exclusive_times
+                    result[stack[-1]] += timestamp - prev_time
+                stack.append(function_id)
+                prev_time = timestamp
+            else:
+                result[stack[-1]] += timestamp - prev_time + 1
+                stack.pop()
+                prev_time = timestamp + 1
+        
+        return result
 ```
 
 ### C
-
 ```c
-#include <stdlib.h>
-#include <string.h>
-
-#define MAX_LOG_SIZE 1000
-
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
 int* exclusiveTime(int n, char** logs, int logsSize, int* returnSize) {
-    int *exclusive_times = (int *)calloc(n, sizeof(int));
-    int stack[MAX_LOG_SIZE], top = -1, previous_time = 0;
-    *returnSize = n;
-
-    for (int i = 0; i < logsSize; i++) {
-        char *log = logs[i];
-        int func_id, timestamp;
-        char action[6];
-
-        sscanf(log, "%d:%[^:]:%d", &func_id, action, &timestamp);
-
-        if (strcmp(action, "start") == 0) {
-            if (top != -1) {
-                exclusive_times[stack[top]] += timestamp - previous_time;
+    int* result = (int*)calloc(n, sizeof(int));
+    int* stack = (int*)malloc(logsSize * sizeof(int));
+    int stackTop = -1;
+    int prev_time = 0;
+    
+    for (int i = 0; i < logsSize; ++i) {
+        char* log = logs[i];
+        int function_id, timestamp;
+        char type[6];
+        
+        sscanf(log, "%d:%5[^:]:%d", &function_id, type, &timestamp);
+        
+        if (strcmp(type, "start") == 0) {
+            if (stackTop != -1) {
+                result[stack[stackTop]] += timestamp - prev_time;
             }
-            stack[++top] = func_id;
-            previous_time = timestamp;
-        } else { // action == "end"
-            exclusive_times[stack[top--]] += timestamp - previous_time + 1;
-            previous_time = timestamp + 1;
+            stack[++stackTop] = function_id;
+            prev_time = timestamp;
+        } else {
+            result[stack[stackTop]] += timestamp - prev_time + 1;
+            stackTop--;
+            prev_time = timestamp + 1;
         }
     }
-
-    return exclusive_times;
+    
+    free(stack);
+    *returnSize = n;
+    return result;
 }
 ```
 
 ### C#
-
 ```csharp
-using System;
-using System.Collections.Generic;
-
 public class Solution {
     public int[] ExclusiveTime(int n, IList<string> logs) {
-        int[] exclusive_times = new int[n];
+        int[] result = new int[n];
         Stack<int> stack = new Stack<int>();
-        int previous_time = 0;
-
-        foreach (var log in logs) {
+        int prev_time = 0;
+        
+        foreach (string log in logs) {
             string[] parts = log.Split(':');
-            int func_id = Int32.Parse(parts[0]);
-            string action = parts[1];
-            int timestamp = Int32.Parse(parts[2]);
-
-            if (action == "start") {
+            int id = int.Parse(parts[0]);
+            string type = parts[1];
+            int timestamp = int.Parse(parts[2]);
+            
+            if (type == "start") {
                 if (stack.Count > 0) {
-                    exclusive_times[stack.Peek()] += timestamp - previous_time;
+                    result[stack.Peek()] += timestamp - prev_time;
                 }
-                stack.Push(func_id);
-                previous_time = timestamp;
-            } else { // action == "end"
-                exclusive_times[stack.Pop()] += timestamp - previous_time + 1;
-                previous_time = timestamp + 1;
+                stack.Push(id);
+                prev_time = timestamp;
+            } else {
+                result[stack.Peek()] += timestamp - prev_time + 1;
+                stack.Pop();
+                prev_time = timestamp + 1;
             }
         }
-        return exclusive_times;
+        
+        return result;
     }
 }
 ```
 
 ### JavaScript
-
 ```javascript
 /**
  * @param {number} n
@@ -321,60 +281,60 @@ public class Solution {
  * @return {number[]}
  */
 var exclusiveTime = function(n, logs) {
-    const exclusive_times = new Array(n).fill(0);
-    const stack = [];
-    let previous_time = 0;
+    let result = new Array(n).fill(0);
+    let stack = [];
+    let prev_time = 0;
 
     for (let log of logs) {
-        const [func_id_str, action, timestamp_str] = log.split(':');
-        const func_id = parseInt(func_id_str);
-        const timestamp = parseInt(timestamp_str);
+        let [id, type, timestamp] = log.split(':');
+        id = parseInt(id);
+        timestamp = parseInt(timestamp);
 
-        if (action === "start") {
-            if (stack.length > 0) {
-                exclusive_times[stack[stack.length - 1]] += timestamp - previous_time;
+        if (type === "start") {
+            if (stack.length) {
+                result[stack[stack.length - 1]] += timestamp - prev_time;
             }
-            stack.push(func_id);
-            previous_time = timestamp;
-        } else { // action === "end"
-            exclusive_times[stack.pop()] += timestamp - previous_time + 1;
-            previous_time = timestamp + 1;
+            stack.push(id);
+            prev_time = timestamp;
+        } else {
+            result[stack.pop()] += timestamp - prev_time + 1;
+            prev_time = timestamp + 1;
         }
     }
-    return exclusive_times;
+
+    return result;
 };
 ```
 
 ### TypeScript
-
 ```typescript
 function exclusiveTime(n: number, logs: string[]): number[] {
-    const exclusive_times = new Array(n).fill(0);
-    const stack: number[] = [];
-    let previous_time = 0;
+    let result = new Array(n).fill(0);
+    let stack: number[] = [];
+    let prev_time = 0;
 
-    for (let log of logs) {
-        const [func_id_str, action, timestamp_str] = log.split(':');
-        const func_id = parseInt(func_id_str);
-        const timestamp = parseInt(timestamp_str);
+    for (const log of logs) {
+        const [idStr, type, timestampStr] = log.split(':');
+        const id = parseInt(idStr);
+        const timestamp = parseInt(timestampStr);
 
-        if (action === "start") {
+        if (type === "start") {
             if (stack.length > 0) {
-                exclusive_times[stack[stack.length - 1]] += timestamp - previous_time;
+                result[stack[stack.length - 1]] += timestamp - prev_time;
             }
-            stack.push(func_id);
-            previous_time = timestamp;
-        } else { // action === "end"
-            exclusive_times[stack.pop()] += timestamp - previous_time + 1;
-            previous_time = timestamp + 1;
+            stack.push(id);
+            prev_time = timestamp;
+        } else {
+            result[stack.pop()!] += timestamp - prev_time + 1;
+            prev_time = timestamp + 1;
         }
     }
-    return exclusive_times;
+
+    return result;
 }
 ```
 
 ### PHP
-
 ```php
 class Solution {
 
@@ -384,355 +344,381 @@ class Solution {
      * @return Integer[]
      */
     function exclusiveTime($n, $logs) {
-        $exclusive_times = array_fill(0, $n, 0);
+        $result = array_fill(0, $n, 0);
         $stack = [];
-        $previous_time = 0;
-
+        $prev_time = 0;
+        
         foreach ($logs as $log) {
-            list($func_id_str, $action, $timestamp_str) = explode(":", $log);
-            $func_id = intval($func_id_str);
-            $timestamp = intval($timestamp_str);
-
-            if ($action === "start") {
+            list($id, $type, $timestamp) = explode(':', $log);
+            $id = (int)$id;
+            $timestamp = (int)$timestamp;
+            
+            if ($type == "start") {
                 if (!empty($stack)) {
-                    $exclusive_times[$stack[count($stack) - 1]] += $timestamp - $previous_time;
+                    $result[end($stack)] += $timestamp - $prev_time;
                 }
-                array_push($stack, $func_id);
-                $previous_time = $timestamp;
-            } else { // action === "end"
-                $exclusive_times[array_pop($stack)] += $timestamp - $previous_time + 1;
-                $previous_time = $timestamp + 1;
+                array_push($stack, $id);
+                $prev_time = $timestamp;
+            } else {
+                $result[array_pop($stack)] += $timestamp - $prev_time + 1;
+                $prev_time = $timestamp + 1;
             }
         }
-        return $exclusive_times;
+        return $result;
     }
 }
 ```
 
 ### Swift
-
 ```swift
 class Solution {
     func exclusiveTime(_ n: Int, _ logs: [String]) -> [Int] {
-        var exclusive_times = [Int](repeating: 0, count: n)
+        var result = [Int](repeating: 0, count: n)
         var stack = [Int]()
-        var previous_time = 0
-
+        var prev_time = 0
+        
         for log in logs {
             let parts = log.split(separator: ":")
-            let func_id = Int(parts[0])!
-            let action = String(parts[1])
+            let id = Int(parts[0])!
+            let type = String(parts[1])
             let timestamp = Int(parts[2])!
-
-            if action == "start" {
+            
+            if type == "start" {
                 if !stack.isEmpty {
-                    exclusive_times[stack.last!] += timestamp - previous_time
+                    result[stack.last!] += timestamp - prev_time
                 }
-                stack.append(func_id)
-                previous_time = timestamp
-            } else { // action == "end"
-                exclusive_times[stack.removeLast()] += timestamp - previous_time + 1
-                previous_time = timestamp + 1
+                stack.append(id)
+                prev_time = timestamp
+            } else {
+                result[stack.last!] += timestamp - prev_time + 1
+                stack.removeLast()
+                prev_time = timestamp + 1
             }
         }
-
-        return exclusive_times
+        
+        return result
     }
 }
 ```
 
 ### Kotlin
-
 ```kotlin
 class Solution {
     fun exclusiveTime(n: Int, logs: List<String>): IntArray {
-        val exclusiveTimes = IntArray(n)
+        val result = IntArray(n)
         val stack = mutableListOf<Int>()
-        var previousTime = 0
+        var prev_time = 0
 
         for (log in logs) {
             val parts = log.split(":")
-            val funcId = parts[0].toInt()
-            val action = parts[1]
+            val id = parts[0].toInt()
+            val type = parts[1]
             val timestamp = parts[2].toInt()
 
-            if (action == "start") {
+            if (type == "start") {
                 if (stack.isNotEmpty()) {
-                    exclusiveTimes[stack.last()] += timestamp - previousTime
+                    result[stack.last()] += timestamp - prev_time
                 }
-                stack.add(funcId)
-                previousTime = timestamp
-            } else { // action == "end"
-                exclusiveTimes[stack.removeAt(stack.size - 1)] += timestamp - previousTime + 1
-                previousTime = timestamp + 1
+                stack.add(id)
+                prev_time = timestamp
+            } else {
+                result[stack.last()] += timestamp - prev_time + 1
+                stack.removeAt(stack.size - 1)
+                prev_time = timestamp + 1
             }
         }
 
-        return exclusiveTimes
+        return result
     }
 }
 ```
 
 ### Dart
-
 ```dart
 class Solution {
   List<int> exclusiveTime(int n, List<String> logs) {
-    List<int> exclusiveTimes = List.filled(n, 0);
+    List<int> result = List.filled(n, 0);
     List<int> stack = [];
-    int previousTime = 0;
-
+    int prev_time = 0;
+    
     for (String log in logs) {
-      List<String> parts = log.split(':');
-      int funcId = int.parse(parts[0]);
-      String action = parts[1];
+      List<String> parts = log.split(":");
+      int id = int.parse(parts[0]);
+      String type = parts[1];
       int timestamp = int.parse(parts[2]);
-
-      if (action == "start") {
+      
+      if (type == "start") {
         if (stack.isNotEmpty) {
-          exclusiveTimes[stack.last] += timestamp - previousTime;
+          result[stack.last] += timestamp - prev_time;
         }
-        stack.add(funcId);
-        previousTime = timestamp;
-      } else { // action == "end"
-        exclusiveTimes[stack.removeLast()] += timestamp - previousTime + 1;
-        previousTime = timestamp + 1;
+        stack.add(id);
+        prev_time = timestamp;
+      } else {
+        result[stack.removeLast()] += timestamp - prev_time + 1;
+        prev_time = timestamp + 1;
       }
     }
-
-    return exclusiveTimes;
+    
+    return result;
   }
 }
 ```
 
 ### Go
-
 ```go
 func exclusiveTime(n int, logs []string) []int {
-    exclusiveTimes := make([]int, n)
-    stack := []int{}
-    previousTime := 0
+    result := make([]int, n)
+    var stack []int
+    prev_time := 0
 
     for _, log := range logs {
-        parts := strings.Split(log, ":")
-        funcId, _ := strconv.Atoi(parts[0])
-        action := parts[1]
-        timestamp, _ := strconv.Atoi(parts[2])
+        var id, timestamp int
+        var tp string
+        fmt.Sscanf(log, "%d:%[^:]:%d", &id, &tp, &timestamp)
 
-        if action == "start" {
+        if tp == "start" {
             if len(stack) > 0 {
-                exclusiveTimes[stack[len(stack)-1]] += timestamp - previousTime
+                result[stack[len(stack)-1]] += timestamp - prev_time
             }
-            stack = append(stack, funcId)
-            previousTime = timestamp
-        } else { // action == "end"
-            exclusiveTimes[stack[len(stack)-1]] += timestamp - previousTime + 1
+            stack = append(stack, id)
+            prev_time = timestamp
+        } else {
+            result[stack[len(stack)-1]] += timestamp - prev_time + 1
             stack = stack[:len(stack)-1]
-            previousTime = timestamp + 1
+            prev_time = timestamp + 1
         }
     }
 
-    return exclusiveTimes
+    return result
 }
 ```
 
 ### Ruby
-
 ```ruby
 # @param {Integer} n
 # @param {String[]} logs
 # @return {Integer[]}
 def exclusive_time(n, logs)
-    exclusive_times = Array.new(n, 0)
+    result = Array.new(n, 0)
     stack = []
-    previous_time = 0
+    prev_time = 0
 
     logs.each do |log|
-        func_id_str, action, timestamp_str = log.split(":")
-        func_id = func_id_str.to_i
-        timestamp = timestamp_str.to_i
+        parts = log.split(':')
+        id = parts[0].to_i
+        type = parts[1]
+        timestamp = parts[2].to_i
 
-        if action == "start"
+        if type == "start"
             if !stack.empty?
-                exclusive_times[stack.last] += timestamp - previous_time
+                result[stack[-1]] += timestamp - prev_time
             end
-            stack.push(func_id)
-            previous_time = timestamp
-        else # action == "end"
-            exclusive_times[stack.pop] += timestamp - previous_time + 1
-            previous_time = timestamp + 1
+            stack.push(id)
+            prev_time = timestamp
+        else
+            result[stack[-1]] += timestamp - prev_time + 1
+            stack.pop
+            prev_time = timestamp + 1
         end
     end
-
-    exclusive_times
+    
+    result
 end
 ```
 
 ### Scala
-
 ```scala
 object Solution {
     def exclusiveTime(n: Int, logs: List[String]): Array[Int] = {
-        val exclusiveTimes = Array.fill(n)(0)
-        val stack = scala.collection.mutable.Stack[Int]()
-        var previousTime = 0
+        val result = Array.fill(n)(0)
+        var stack = List.empty[Int]
+        var prev_time = 0
 
-        for (log <- logs) {
+        logs.foreach { log =>
             val parts = log.split(":")
-            val funcId = parts(0).toInt
-            val action = parts(1)
+            val id = parts(0).toInt
+            val tp = parts(1)
             val timestamp = parts(2).toInt
 
-            if (action == "start") {
+            if (tp == "start") {
                 if (stack.nonEmpty) {
-                    exclusiveTimes(stack.top) += timestamp - previousTime
+                    result(stack.head) += timestamp - prev_time
                 }
-                stack.push(funcId)
-                previousTime = timestamp
-            } else { // action == "end"
-                exclusiveTimes(stack.pop) += timestamp - previousTime + 1
-                previousTime = timestamp + 1
+                stack = id :: stack
+                prev_time = timestamp
+            } else {
+                result(stack.head) += timestamp - prev_time + 1
+                stack = stack.tail
+                prev_time = timestamp + 1
             }
         }
 
-        exclusiveTimes
+        result
     }
 }
 ```
 
 ### Rust
-
 ```rust
 impl Solution {
     pub fn exclusive_time(n: i32, logs: Vec<String>) -> Vec<i32> {
-        let mut exclusive_times = vec![0; n as usize];
+        let mut result = vec![0; n as usize];
         let mut stack = Vec::new();
-        let mut previous_time = 0;
+        let mut prev_time = 0;
 
         for log in logs {
             let parts: Vec<&str> = log.split(':').collect();
-            let func_id = parts[0].parse::<usize>().unwrap();
-            let action = parts[1];
-            let timestamp = parts[2].parse::<i32>().unwrap();
+            let id: usize = parts[0].parse().unwrap();
+            let tp = parts[1];
+            let timestamp: i32 = parts[2].parse().unwrap();
 
-            if action == "start" {
-                if let Some(&last_func) = stack.last() {
-                    exclusive_times[last_func] += timestamp - previous_time;
+            if tp == "start" {
+                if !stack.is_empty() {
+                    result[*stack.last().unwrap()] += timestamp - prev_time;
                 }
-                stack.push(func_id);
-                previous_time = timestamp;
-            } else { // action == "end"
-                if let Some(last_func) = stack.pop() {
-                    exclusive_times[last_func] += timestamp - previous_time + 1;
-                }
-                previous_time = timestamp + 1;
+                stack.push(id);
+                prev_time = timestamp;
+            } else {
+                result[*stack.last().unwrap()] += timestamp - prev_time + 1;
+                stack.pop();
+                prev_time = timestamp + 1;
             }
         }
 
-        exclusive_times
+        result
     }
 }
 ```
 
 ### Racket
-
 ```racket
 (define/contract (exclusive-time n logs)
   (-> exact-integer? (listof string?) (listof exact-integer?))
-  ;; implementation based on the same logic using Racket idioms
-  (define exclusive-times (make-vector n 0))
-  (define stack (make-stack))
-  (define previous-time 0)
-
-  (for-each
+  (define result (make-vector n 0))
+  (define stack '())
+  (define prev-time 0)
+  
+  (for-each 
    (lambda (log)
-     (define parts (string-split log ":"))
-     (define func-id (string->number (list-ref parts 0)))
-     (define action (list-ref parts 1))
-     (define timestamp (string->number (list-ref parts 2)))
-
-     (if (string=? action "start")
-         (begin
-           (when (not (empty-stack? stack))
-             (vector-set! exclusive-times
-                          (peek-stack stack)
-                          (+ (vector-ref exclusive-times (peek-stack stack))
-                             (- timestamp previous-time))))
-           (push-stack func-id stack)
-           (set! previous-time timestamp))
-         (begin
-           (vector-set! exclusive-times
-                        (pop-stack stack)
-                        (+ (vector-ref exclusive-times (pop-stack stack))
-                           (add1 (- timestamp previous-time))))
-           (set! previous-time (+ 1 timestamp)))))
+     (define components (regexp-split #rx":" log))
+     (define id (string->number (car components)))
+     (define op (cadr components))
+     (define timestamp (string->number (caddr components)))
+     (if (string=? op "start")
+       (begin
+         (unless (null? stack)
+           (vector-set! result (car stack) 
+                        (+ (vector-ref result (car stack))
+                           (- timestamp prev-time))))
+         (set! stack (cons id stack))
+         (set! prev-time timestamp))
+       (begin
+         (vector-set! result (car stack)
+                      (+ (vector-ref result (car stack))
+                         (- (+ timestamp 1) prev-time)))
+         (set! stack (cdr stack))
+         (set! prev-time (+ timestamp 1)))))
    logs)
-  (vector->list exclusive-times))
+  (vector->list result))
 ```
 
 ### Erlang
-
 ```erlang
 -spec exclusive_time(N :: integer(), Logs :: [unicode:unicode_binary()]) -> [integer()].
 exclusive_time(N, Logs) ->
-    exclusive_time(Logs, N, [], 0, lists:duplicate(N, 0)).
+    Result = lists:duplicate(N, 0),
+    {Result, _} = exclusive_time(Logs, Result, [], 0),
+    Result.
 
-exclusive_time([], _, _, _, Timings) ->
-    Timings;
-exclusive_time([Log | Rest], N, Stack, PrevTime, Timings) ->
-    %% Split log into parts
-    [FuncId, Action, Timestamp] = string:split(Log, ":", all),
-    FuncId = list_to_integer(FuncId),
-    Timestamp = list_to_integer(Timestamp),
-    case Action of
-        "start" ->
-            Stack1 = case Stack of
-                [] -> Stack;
-                [Top | _] ->
-                    {_, NewTimings} = adjust_time(Timings, Top, Timestamp - PrevTime),
-                    NewTimings
+exclusive_time([], Result, _, _) ->
+    {Result, []};
+exclusive_time([Log | Logs], Result, Stack, PrevTime) ->
+    [IdStr, Event, TimestampStr] = binary:split(Log, <<":">>, [global]),
+    Id = binary_to_integer(IdStr),
+    Timestamp = binary_to_integer(TimestampStr),
+    case Event of
+        <<"start">> ->
+            {Result, Stack1} = case Stack of
+                [] -> {Result, Stack};
+                [Top | _] -> 
+                    NewResult = lists:update_element(Top + 1, fun(X) -> X + (Timestamp - PrevTime) end, Result),
+                    {NewResult, Stack}
             end,
-            exclusive_time(Rest, N, [FuncId | Stack1], Timestamp, Timings);
-        "end" ->
+            exclusive_time(Logs, Result, [Id | Stack1], Timestamp);
+        <<"end">> ->
             [Top | Stack1] = Stack,
-            {UpdatedTimings, NewTimings} = adjust_time(Timings, Top, Timestamp - PrevTime + 1),
-            exclusive_time(Rest, N, Stack1, Timestamp + 1, NewTimings)
+            NewResult = lists:update_element(Id + 1, fun(X) -> X + (Timestamp - PrevTime + 1) end, Result),
+            exclusive_time(Logs, NewResult, Stack1, Timestamp + 1)
     end.
-
-adjust_time(Timings, FuncId, TimeDiff) ->
-    Timing = lists:nth(FuncId + 1, Timings),
-    UpdatedTiming = Timing + TimeDiff,
-    NewTimings = lists:replace(FuncId + 1, UpdatedTiming, Timings),
-    {UpdatedTiming, NewTimings}.
 ```
+
+### Elixir
+```elixir
+defmodule Solution do
+  @spec exclusive_time(n :: integer, logs :: [String.t]) :: [integer]
+  def exclusive_time(n, logs) do
+    defp process_log([], result, _prev_time, _stack), do: result
+
+    defp process_log([log | rest], result, prev_time, stack) do
+      [id_str, type, timestamp_str] = String.split(log, ":")
+      id = String.to_integer(id_str)
+      timestamp = String.to_integer(timestamp_str)
+      
+      if type == "start" do
+        if stack != [] do
+          [top | _] = stack
+          result = List.update_at(result, top, &(&1 + (timestamp - prev_time)))
+        end
+        process_log(rest, result, timestamp, [id | stack])
+      else
+        [top | stack] = stack
+        result = List.update_at(result, top, &(&1 + (timestamp - prev_time + 1)))
+        process_log(rest, result, timestamp + 1, stack)
+      end
+    end
+
+    result = List.duplicate(0, n)
+    process_log(logs, result, 0, [])
+  end
+end
+```
+
+These implementations provide the solution in the specified languages with the method definitions included. Each implementation adjusts to the language's idioms and conventions.
 
 
 ### Closing Statement
 
-The discussed problem revolves around computing the exclusive time of multiple functions executed by a single-threaded CPU based on start and end log entries. We approached this by leveraging the call stack principles, which allowed us to essentially simulate the function call stack and manage the nested function executions accurately. We utilized a stack to track ongoing function calls and calculated the execution time for each in an efficient manner.
+**Interviewer**: We've successfully walked through the problem of calculating the exclusive execution time for functions based on log entries. We discussed a brute force approach initially and then optimized it using an efficient stack-based method. We also reviewed and implemented the solution across various programming languages, ensuring the approach is clear and adaptable to different coding environments. 
 
-This solution provided a clear and efficient way of handling the problem, accommodating all constraints and edge cases. The implementations in multiple programming languages ensured that the solution is versatile and can be adapted to various coding environments.
+Your understanding and ability to translate the algorithm into different languages demonstrate a strong grasp of both the problem and the core concepts of runtime and space efficiency. This kind of problem is fundamental in understanding how recursive and nested function calls are managed during execution, and it tests both algorithmic thinking and familiarity with data structures like stacks.
 
-### Time and Space Complexity
-- **Time Complexity:** \(O(L)\), where \(L\) is the number of logs. This is because each log is processed exactly once.
-- **Space Complexity:** \(O(N + S)\), where \(N\) is the number of functions (for the result list) and \(S\) is the size of the stack, which could be at most \(N\).
+**Interviewee**: Thank you! This was a great exercise in understanding how to manage function call times and optimize nested executions. I'm glad we covered multiple languages, as it provided a comprehensive look at how the same algorithm can be adapted.
 
 ### Similar Questions
-Here are a few similar questions that also involve the understanding of stack data structures and function execution sequencing:
 
-1. **Valid Parentheses**: Determine if the input string containing just the characters '(', ')', '{', '}', '[' and ']' is valid.
-   - **Leetcode**: [Valid Parentheses](https://leetcode.com/problems/valid-parentheses/)
+Solving problems similar to this one can further solidify your understanding of stack usage and function call management. Here are a few related questions you might find interesting:
 
-2. **Evaluate Reverse Polish Notation**: Evaluate the value of an arithmetic expression in Reverse Polish Notation.
-   - **Leetcode**: [Evaluate Reverse Polish Notation](https://leetcode.com/problems/evaluate-reverse-polish-notation/)
+1. **The Daily Temperatures Problem (Leetcode #739)**
+   - Given a list of daily temperatures, return a list such that for each day in the input, tells you how many days you would have to wait until a warmer temperature. If there is no future day for which this is possible, put 0 instead.
+   - This problem also employs a stack to keep track of indices and calculate the number of days to wait.
 
-3. **Next Greater Element I**: Find the next greater element for every element in a given array, which is another array with non-repetitive numbers.
-   - **Leetcode**: [Next Greater Element I](https://leetcode.com/problems/next-greater-element-i/)
+2. **Valid Parentheses (Leetcode #20)**
+   - Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. An input string is valid if the brackets are closed in the correct order.
+   - Uses stack to manage the opening and closing of parentheses.
 
-4. **Basic Calculator II**: Implement a basic calculator to evaluate a simple expression string.
-   - **Leetcode**: [Basic Calculator II](https://leetcode.com/problems/basic-calculator-ii/)
+3. **Next Greater Element II (Leetcode #503)**
+   - Given a circular array, find the next greater number for every element in the array. The next greater number of a number x is the first greater number to its traversing-order next in the array, which means you could search circularly to find its next greater number.
+   - Typical usage of the stack for maintaining elements while iterating the array.
 
-5. **Daily Temperatures**: Given a list of daily temperatures, return a list such that the answer to each day is the number of days you would have to wait until a warmer temperature.
-   - **Leetcode**: [Daily Temperatures](https://leetcode.com/problems/daily-temperatures/)
+4. **Basic Calculator II (Leetcode #227)**
+   - Implement a basic calculator to evaluate a simple expression string.
+   - Handles mathematical expressions and utilizes a stack to manage operations.
 
-These problems are excellent practice for mastering the stack data structure and understanding various scenarios where stack operations can be leveraged to solve complex problems efficiently.
+5. **Exclusive Time of Functions II (Similar Custom Problem)**
+   - Extend the problem to multiple threads, where each thread can independently call functions. Calculate exclusive times per thread and aggregate results.
+   
+6. **Evaluate Reverse Polish Notation (Leetcode #150)**
+   - Evaluate the value of an arithmetic expression in Reverse Polish Notation.
+   - Stack is used to evaluate expressions given in reverse.
+
+These problems will provide further practice with stack data structures and managing execution contexts. Working through such problems will enhance both your algorithmic skills and your mastery of different programming languages.

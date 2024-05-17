@@ -1,37 +1,55 @@
 ### Interviewer and Interviewee Discussion
 
-**Interviewer:** Let's discuss a SQL problem. You have a `Customer` table with columns `id`, `name`, and `referee_id`. The `id` is the primary key. Each row in this table represents a customer's id, their name, and the id of the customer who referred them. You need to find the names of customers who are not referred by the customer with `id = 2`. How would you approach this?
+**Interviewer**: Let's discuss a database question. Consider a table called `Customer` which has three columns: `id`, `name`, and `referee_id`. The `id` is the primary key and each row indicates the id of a customer, their name, and the id of the customer who referred them. 
 
-**Interviewee:** First, I would need to get a clear understanding of the table structure and the relationships here. From the example, it looks like some customers, such as Alex and Mark, have their `referee_id` as 2, meaning they were referred by the customer with `id = 2`.
+**Interviewee**: Got it. So each row uniquely represents a customer and `referee_id` is the id of another customer who referred them.
 
-**Interviewer:** Correct. What initial thoughts do you have about solving this problem?
+**Interviewer**: Correct. The task is to find the names of customers who were not referred by the customer with `id = 2`. The result needs to be returned in any order. 
 
-**Interviewee:** One brute force way to approach this would be to iterate through each customer in the table, check if their `referee_id` is 2, and then exclude those customers from the result. In SQL terms, it would translate into selecting customers whose `referee_id` is not equal to 2 or is null.
+**Interviewee**: Understood. The `referee_id` will help us filter out the entries. If a customer has `referee_id = 2`, then we don't include them in our result set.
 
-**Interviewer:** Sounds reasonable. Can you state the query for this brute force approach?
+**Interviewer**: Exactly. How would you start solving this problem?
 
-**Interviewee:**
+### Initial Thoughts and Brute Force Approach
+
+**Interviewee**: For a brute force approach, I would:
+
+1. Scan through the entire table.
+2. For each row, check the `referee_id` field.
+3. If `referee_id` is not equal to 2 (and it could also be null), include the name in the result set.
+
+### Brute Force Approach Explanation and Complexity
+
+**Interviewer**: Sounds good. Can you proceed and explain the time and space complexity for this brute force method?
+
+**Interviewee**:
+- **Time Complexity**: We need to scan every row in the table which results in O(n) time complexity, where n is the number of rows in the table.
+- **Space Complexity**: The space complexity would be O(m), where m is the number of rows that do not have `referee_id = 2`, for storing the result set.
+
+### Optimizing the Approach
+
+**Interviewee**: Let's consider how to optimize this. In SQL-based queries, we can directly use a `SELECT` statement to filter out the unwanted rows. This might be more efficient and offers a clear, concise solution.
+
+We can write a simple SQL query like:
 ```sql
 SELECT name
 FROM Customer
 WHERE referee_id != 2 OR referee_id IS NULL;
 ```
 
-**Interviewer:** That works. Let's go over the complexity of this approach. What can you say about its time and space complexity?
+**Interviewer**: That looks good. Could you explain why this query works?
 
-**Interviewee:** The time complexity of this query is O(n), where n is the number of rows in the `Customer` table. This is because the query has to inspect each row once to check the `referee_id` condition. The space complexity is O(1) in terms of additional space required for the query execution itself, but the final result could have up to n rows.
+**Interviewee**:
 
-### Optimizing the Approach
+- The `SELECT` statement extracts the `name` column from the `Customer` table.
+- The `WHERE` clause filters the customers. Specifically, `referee_id != 2` eliminates those referred by the customer with `id = 2`.
+- We also include the condition `referee_id IS NULL` to ensure customers with no referees are included since their `referee_id` is `NULL`.
 
-**Interviewer:** Your brute force solution is efficient for this problem. However, if we were to consider optimization, what could be done?
+**Interviewer**: Great! Can you illustrate this with a diagram?
 
-**Interviewee:** An index on the `referee_id` column could help to speed up the query performance, especially if the table is significantly large. The database management system can quickly locate rows where `referee_id` is not 2, instead of performing a full table scan.
+**Interviewee**: Sure, let's visualize it:
 
-**Interviewer:** Excellent point. Adding indices can certainly improve performance. Let's also focus on edge cases and ensures our query handles them appropriately. What if the `referee_id` has other non-null values?
-
-**Interviewee:** The query should still hold under these conditions, as the `WHERE` clause explicitly checks for `referee_id` not equal to 2, accommodating other values or NULLs.
-
-**Interviewer:** Very well. Let’s use a visual diagram to clarify the final result of your query. Assume you have the following Customer table:
+1. Here’s our `Customer` table:
 
 ```
 +----+------+------------+
@@ -44,18 +62,27 @@ WHERE referee_id != 2 OR referee_id IS NULL;
 | 5  | Zack | 1          |
 | 6  | Mark | 2          |
 +----+------+------------+
-``` 
+```
 
-**Interviewee:** Here is how the query processes each row:
+2. Applying the SQL query:
 
-- For ID 1 (Will): `referee_id` is `null`. (Included)
-- For ID 2 (Jane): `referee_id` is `null`. (Included)
-- For ID 3 (Alex): `referee_id` is 2. (Excluded)
-- For ID 4 (Bill): `referee_id` is `null`. (Included)
-- For ID 5 (Zack): `referee_id` is 1. (Included)
-- For ID 6 (Mark): `referee_id` is 2. (Excluded)
+```
+SELECT name
+FROM Customer
+WHERE referee_id != 2 OR referee_id IS NULL;
+```
 
-So, the final result:
+3. Step-by-step Filtering:
+
+   - Will (referee_id = null) → include
+   - Jane (referee_id = null) → include
+   - Alex (referee_id = 2) → exclude
+   - Bill (referee_id = null) → include
+   - Zack (referee_id = 1) → include
+   - Mark (referee_id = 2) → exclude
+
+4. Result:
+
 ```
 +------+
 | name |
@@ -67,61 +94,59 @@ So, the final result:
 +------+
 ```
 
-Here's a simple depiction:
+**Interviewer**: Nicely explained and well-illustrated! This query certainly presents a more efficient solution.
 
-```
-             ,----+------+------------,
-             | id | name | referee_id  |
-             |====|======|=============|
-             |  1 | Will | NULL        |  <-- [Included: ref_id is NULL]
-             |  2 | Jane | NULL        |  <-- [Included: ref_id is NULL]
-             |  3 | Alex | 2           |  <-- [Excluded: ref_id is 2]
-             |  4 | Bill | NULL        |  <-- [Included: ref_id is NULL]
-             |  5 | Zack | 1           |  <-- [Included: ref_id is 1]
-             |  6 | Mark | 2           |  <-- [Excluded: ref_id is 2]
-             '----+------+------------'
-```
+**Interviewee**: Thank you! Glad to hear that.
 
-**Interviewer:** That’s a clear and accurate interpretation. Good job!
+
+
+Sure, here is the code for each language wrapped in the appropriate methods provided.
+
 ### MySQL
 
-```sql
+```mysql
 # Write your MySQL query statement below
+
 SELECT name
 FROM Customer
 WHERE referee_id != 2 OR referee_id IS NULL;
 ```
 
-- **Time Complexity:** O(n)
-- **Space Complexity:** O(1) for the query execution, O(n) for the result set
+**Time Complexity**: O(n), where n is the number of rows in the `Customer` table, as the query scans each row exactly once.
+
+**Space Complexity**: O(m), where m is the number of rows that do not have `referee_id = 2`, for storing the result set.
 
 ### MS SQL Server
 
-```sql
+```mssql
 /* Write your T-SQL query statement below */
+
 SELECT name
 FROM Customer
 WHERE referee_id != 2 OR referee_id IS NULL;
 ```
 
-- **Time Complexity:** O(n)
-- **Space Complexity:** O(1) for the query execution, O(n) for the result set
+**Time Complexity**: O(n), where n is the number of rows in the `Customer` table, as the query scans each row exactly once.
 
-### Oracle SQL
+**Space Complexity**: O(m), where m is the number of rows that do not have `referee_id = 2`, for storing the result set.
 
-```sql
+### Oracle
+
+```oraclesql
 /* Write your PL/SQL query statement below */
+
 SELECT name
 FROM Customer
 WHERE referee_id != 2 OR referee_id IS NULL;
 ```
 
-- **Time Complexity:** O(n)
-- **Space Complexity:** O(1) for the query execution, O(n) for the result set
+**Time Complexity**: O(n), where n is the number of rows in the `Customer` table, as the query scans each row exactly once.
+
+**Space Complexity**: O(m), where m is the number of rows that do not have `referee_id = 2`, for storing the result set.
 
 ### Pandas (Python)
 
-```python
+```pythondata
 import pandas as pd
 
 def find_customer_referee(customer: pd.DataFrame) -> pd.DataFrame:
@@ -129,92 +154,51 @@ def find_customer_referee(customer: pd.DataFrame) -> pd.DataFrame:
     return result[['name']]
 ```
 
-- **Time Complexity:** O(n)
-- **Space Complexity:** O(n)
+**Time Complexity**: O(n), where n is the number of rows in the `customer` DataFrame, as the filtering operation scans each row exactly once.
+
+**Space Complexity**: O(m), where m is the number of rows that do not have `referee_id = 2`, for storing the result DataFrame.
 
 ### PostgreSQL
 
-```sql
+```postgresql
 -- Write your PostgreSQL query statement below
+
 SELECT name
 FROM Customer
 WHERE referee_id != 2 OR referee_id IS NULL;
 ```
 
-- **Time Complexity:** O(n)
-- **Space Complexity:** O(1) for the query execution, O(n) for the result set
+**Time Complexity**: O(n), where n is the number of rows in the `Customer` table, as the query scans each row exactly once.
 
-### Summary
-For each SQL variant and Pandas, the brute force solution involves querying and filtering based on the `referee_id` column. The time complexity for each solution is O(n) due to the need to inspect each row in the table once. The space complexity is O(1) for the query execution itself, but it can be O(n) if we consider the size of the result set. In Pandas, both time and space complexity are O(n) because it processes and stores the resulting DataFrame in memory.
+**Space Complexity**: O(m), where m is the number of rows that do not have `referee_id = 2`, for storing the result set.
 
-Note that SQL-based solutions can benefit from indexing on `referee_id` to improve performance in practical scenarios.
+These solutions across different languages and SQL variants follow the same logic and thus share similar time and space complexities.
 
 
 ### Closing Statement
 
-During this interview discussion, we explored how to retrieve the names of customers who were not referred by the customer with `id = 2` from a `Customer` table. 
-
-1. **Brute Force Approach:**
-   - We began with a straightforward approach involving a simple SQL query that selects customers whose `referee_id` is not 2 or is `NULL`.
-   - This approach has a time complexity of O(n) and a space complexity of O(1) for the query execution, with potential O(n) space for the result set.
-
-2. **Performance Improvements:**
-   - Indexing on the `referee_id` column was discussed as a means to potentially improve query performance.
-   
-3. **Implementation:**
-   - We provided example implementations in various SQL languages (MySQL, MS SQL Server, Oracle SQL, PostgreSQL) and a Python Pandas implementation for diverse usage scenarios.
-
-This problem illustrates fundamental SQL filtering operations and basic optimization techniques, which are essential skills for working with relational databases and data analysis frameworks.
+We have successfully discussed and solved the problem of finding customers who are not referred by the customer with `id = 2` in a database table. We reviewed an initial brute force approach to understand the basics and then optimized it using SQL queries and Pandas DataFrame techniques for better performance. The optimized solutions are efficient, with a time complexity of O(n) and a space complexity of O(m). These solutions demonstrate how SQL and data manipulation libraries like Pandas can be used effectively for such filtering operations in a database or data frame. This exercise also highlights the importance of thinking through the problem, considering edge cases, and choosing the right tools for optimization.
 
 ### Similar Questions
 
-Here are some similar questions that further test one's understanding of SQL querying and data manipulation:
+1. **Find Customers With Multiple Referees**:
+   - *Description*: Write a query to find the names of customers who have referred more than one customer.
+   - *Solution Idea*: Use a `GROUP BY` clause on `referee_id` and a `HAVING` clause to filter `referee_id` values appearing more than once.
 
-1. **Find Customers Without a Referee:**
-   - Query the names of customers who do not have a referee.
-   ```sql
-   SELECT name
-   FROM Customer
-   WHERE referee_id IS NULL;
-   ```
+2. **Customers Without Referees**:
+   - *Description*: Write a query to find the names of customers who don't have any referees.
+   - *Solution Idea*: Filter customers where the `referee_id` is `NULL`.
 
-2. **Count Customers Referred by a Specific Referee:**
-   - Count the number of customers referred by the customer with `id = 1`.
-   ```sql
-   SELECT COUNT(*)
-   FROM Customer
-   WHERE referee_id = 1;
-   ```
+3. **Find Top Referring Customers**:
+   - *Description*: Write a query to find the top N customers who have referred the most number of other customers.
+   - *Solution Idea*: Aggregate and order by the number of referrals in descending order, and limit the result to the top N.
 
-3. **Find Referee Names:**
-   - Query the names of referees who have referred at least one customer.
-   ```sql
-   SELECT DISTINCT C1.name
-   FROM Customer C1
-   JOIN Customer C2 ON C1.id = C2.referee_id;
-   ```
+4. **Recommendation Chain**:
+   - *Description*: Write a query to determine the chain of recommendations for a given customer.
+   - *Solution Idea*: Use recursive CTEs (Common Table Expressions) to traverse the recommendation links starting from the given customer.
 
-4. **Find Customers Referred by Multiple Referees:**
-   - Identify customers who were referred by more than one referee (assuming the data model supports multiple referees per customer).
-   ```sql
-   SELECT name
-   FROM (
-       SELECT name, COUNT(referee_id) AS ref_count
-       FROM Customer
-       GROUP BY name
-   ) AS Subquery
-   WHERE ref_count > 1;
-   ```
+5. **Customer Referral Graph**:
+   - *Description*: Write a query to find all customers and their direct or indirect referrals forming a graph-like structure.
+   - *Solution Idea*: Utilize recursive queries to explore all levels of referrals starting from each customer.
 
-5. **Find Top Referrers:**
-   - Determine which customers have referred the most other customers.
-   ```sql
-   SELECT referee_id, COUNT(*) AS num_referrals
-   FROM Customer
-   WHERE referee_id IS NOT NULL
-   GROUP BY referee_id
-   ORDER BY num_referrals DESC
-   LIMIT 1;
-   ```
-   
-These questions help to deepen the understanding of data relationships, aggregation, and SQL query formulation, integral for anyone aspiring to be proficient in SQL and data analysis.
+These similar questions will further enhance your SQL and data manipulation skills, allowing you to handle a variety of scenarios involving hierarchical and relational data effectively.

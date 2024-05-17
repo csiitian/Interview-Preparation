@@ -1,119 +1,117 @@
+Let's dive into the discussion format you requested. I'll first present the problem as an interviewer would, followed by initial thoughts on a brute-force approach with its time and space complexity, and finally, we'll work on optimizing it.
+
 ### Interviewer and Interviewee Discussion
 
-**Interviewer:** Let's discuss this problem. We're given a C++ source code split into lines and stored in an array of strings. Our task is to remove all comments from this source code and return the resulting code. C++ has two types of comments: single-line comments beginning with `//` and block comments enclosed between `/*` and `*/`. Could you describe your initial thoughts on how you might approach this problem?
+#### Interviewer:
+"Given a C++ program represented as an array of strings `source`, each string being a line of code, the task is to remove all comments from the code. There are two types of comments to handle:
+1. Line comments initiated by `//` which ignore the rest of the line.
+2. Block comments initiated by `/*` and ending with `*/`, which can span multiple lines.
 
-**Interviewee:** Sure. To start, I'd consider handling the removal of both single-line and block comments. For single-line comments `//`, we'd ignore everything on the line after this sequence. For block comments `/* ... */`, we'd ignore everything from `/*` to the next `*/`, even across multiple lines.
+The goal is to return the source code with these comments removed. If after removing the comments, any line becomes empty, it should not be included in the output. Let's discuss how you would approach this problem."
 
-**Interviewer:** That sounds like a good start. How would you implement a brute force solution for this?
+#### Interviewee:
+"Sure! First, let's break down the problem. We need to identify and remove both types of comments. For line comments, anything after `//` on the same line is ignored. For block comments, everything from `/*` to the next `*/` (including line breaks) is ignored.
 
-**Interviewee:** In a brute force approach:
-1. We'd iterate through each line.
-2. For each line, we'd check for the presence of `//` and `/*`.
-3. If `//` is found, ignore the part of the line after this sequence.
-4. If `/*` is found, we'd start ignoring characters until we encounter `*/`.
+### Initial Thoughts on Brute-Force Approach
 
-To handle block comments that span multiple lines, we'd need a flag to indicate whether we are currently inside a block comment or not and continue ignoring characters until the flag is unset.
+I would iterate through each line of the source code and scan for the presence of `//` and `/*`. Specifically:
+- For line comments, look for `//` and ignore the rest of the line from that point.
+- For block comments, once `/*` is encountered, continue ignoring all text until `*/` is found, even if it spans multiple lines.
 
-### Brute Force Approach and Complexity Analysis
+### Plan:
+1. Traverse each line of the source one by one.
+2. Look for the starting patterns of line and block comments.
+3. Remove the comments as per the rules mentioned.
+4. Append the cleaned lines to the result, skipping empty lines.
 
-**Interviewee:**
-- **Time Complexity:** Let \(n\) be the number of lines and \(m\) be the maximum length of a line. In the worst case, our method would traverse each character in each line exactly once, resulting in a time complexity of \(O(n \times m)\).
-- **Space Complexity:** We may need additional space to store the processed lines, but this would be proportional to the input size. Thus, the space complexity is \(O(n \times m)\).
+However, this method may need nested loops which might not be the most efficient way.
+
+### Brute Force Implementation and Complexity
+
+#### Time Complexity:
+The brute force approach involves iterating through each character of each line. Suppose there are `n` lines and each line has a maximum length of `m` characters. The time complexity is then O(n * m) as worst case we may examine every character.
+
+#### Space Complexity:
+The additional space used depends on the storage of the cleaned lines. In the worst case, we might need O(n * m) space if no comments are present and all lines are retained.
 
 ### Optimizing the Approach
 
-**Interviewer:** The brute force approach seems reasonable. Can you think of ways to optimize it or use more efficient data structures?
+We'll go through the input line by line. If a block comment starts, we'll note that we're in a comment block and continue to search for the end of the block while ignoring everything else until the block ends. For line comments, once we encounter `//`, we can skip the rest of the line. Utilizing a StringBuilder can help optimize string concatenation operations.
 
-**Interviewee:** Let's think this through. While the brute force approach is fairly direct, we can streamline the solution by breaking it down more systematically. Here's a more detailed plan:
+### Optimized Approach Implementation
 
-1. **Initialization:** 
-   - Use a flag to track whether we're inside a block comment.
-   - Use a list to store the resulting lines of code.
+Let me first draw an illustration to help you visualize the process:
 
-2. **Line-by-Line Processing:**
-   - Iterate through each line.
-   - Use a pointer to traverse characters within the line.
-   - If inside a block comment, skip characters until `*/` is encountered.
-   - If a new block comment `/*` or line comment `//` starts, handle accordingly and skip the appropriate characters.
-   - Append non-comment segments to the current processed line.
+#### Block comment spans multiple lines:
 
-3. **Finalize:**
-   - If a line becomes non-empty after processing, add it to the results.
+```
+   /* 
+     This is 
+     a block 
+     comment 
+   */
+```
+Suppose this block starts and ends in the middle of the lines. We need to identify both the starting and ending points and ignore everything between them.
 
-This approach centralizes the operations we need to perform on each line and character, ensuring that we only process characters as needed.
-
-### Visual Representation
-
-```plaintext
-Input source:
-source = [ 
-    "/* Test program */", 
-    "int main()", 
-    "{ ", 
-    "  // variable declaration ", 
-    "int a, b, c;", 
-    "/* This is a test", 
-    "   multiline  ", 
-    "   comment for ", 
-    "   testing */", 
-    "a = b + c;", 
-    "}"
-]
-
-Output source:
-[
-    "int main()",
-    "{",
-    "",
-    "int a, b, c;",
-    "a = b + c;",
-    "}"
-]
+```
+/*         <---- Starting Point
+This is 
+a block 
+comment      <---- Lines to ignore
+*/         <---- Ending Point
 ```
 
-### Optimized Implementation
+#### Visualization:
 
-**Interviewee:**
-```python
-def removeComments(source):
-    in_block = False
-    newline = []
-    res = []
-    
-    for line in source:
-        i = 0
-        while i < len(line):
-            if not in_block:
-                if i + 1 < len(line) and line[i:i+2] == '/*':
-                    in_block = True
-                    i += 1
-                elif i + 1 < len(line) and line[i:i+2] == '//':
-                    break
-                else:
-                    newline.append(line[i])
-            else:
-                if i + 1 < len(line) and line[i:i+2] == '*/':
-                    in_block = False
-                    i += 1
-            i += 1
-        
-        if not in_block and newline:
-            res.append("".join(newline))
-            newline = []
-            
-    return res
 ```
-**Interviewer:** This solution looks comprehensive. Can you briefly explain how it tackles both types of comments?
+Initial:
+source = ["int main() {", "  /* block comment start", "  more comments", "  end of block */", "  return 0;", "}"]
+Edited:
+source = ["int main() {", "", "", "", "  return 0;", "}"]
+Final Output:
+["int main() {", "  return 0;", "}"]
+```
 
-**Interviewee:** Absolutely. The `removeComments` function:
-- Uses a flag `in_block` to handle block comments.
-- Iterates through each line and character.
-- Appends characters to `newline` unless we're in a comment.
-- Updates the flag based on encountering `/*` or `*/`, and skips over `//` comments entirely.
-- After processing each line, `newline` is added to `res` if it's not empty.
+### Code Implementation:
 
-This ensures we handle all types of comments efficiently and produce the expected cleaned code output.
-Sure, let's provide implementations of the `removeComments` method in multiple programming languages, complete with time and space complexity annotations.
+```cpp
+#include <vector>
+#include <string>
+using namespace std;
+
+vector<string> removeComments(vector<string>& source) {
+    vector<string> result;
+    bool inBlock = false;
+    string newLine;
+
+    for (string &line : source) {
+        int i = 0;
+        if (!inBlock) newLine = "";
+        while (i < line.size()) {
+            if (!inBlock && i + 1 < line.size() && line[i] == '/' && line[i + 1] == '*') {
+                inBlock = true;
+                i++;
+            } else if (inBlock && i + 1 < line.size() && line[i] == '*' && line[i + 1] == '/') {
+                inBlock = false;
+                i++;
+            } else if (!inBlock && i + 1 < line.size() && line[i] == '/' && line[i + 1] == '/') {
+                break; // ignore the rest of the line
+            } else if (!inBlock) {
+                newLine += line[i];
+            }
+            i++;
+        }
+        if (!inBlock && !newLine.empty()) {
+            result.push_back(newLine);
+        }
+    }
+    return result;
+}
+```
+
+### Interviewer:
+"Great! This solution should effectively remove both types of comments efficiently. The use of a boolean flag for block comments helps manage multi-line blocks efficiently without needing nested loops. The time complexity remains O(n * m), but the single traversal with clear flag checks is much more optimal for practical input sizes. Well done!"
+Sure! I'll provide the implementation for each language along with the time and space complexity explanations.
 
 ### C++
 
@@ -121,78 +119,78 @@ Sure, let's provide implementations of the `removeComments` method in multiple p
 class Solution {
 public:
     vector<string> removeComments(vector<string>& source) {
-        vector<string> res;
-        bool in_block = false;
-        string newline = "";
-        
-        for (const string& line : source) {
+        vector<string> result;
+        bool inBlock = false;
+        string newLine;
+        for (string &line : source) {
             int i = 0;
+            if (!inBlock) newLine = "";
             while (i < line.size()) {
-                if (!in_block) {
-                    if (i + 1 < line.size() && line[i] == '/' && line[i + 1] == '*') {
-                        in_block = true;
-                        i++;
-                    } else if (i + 1 < line.size() && line[i] == '/' && line[i + 1] == '/') {
-                        break;
-                    } else {
-                        newline += line[i];
-                    }
-                } else {
-                    if (i + 1 < line.size() && line[i] == '*' && line[i + 1] == '/') {
-                        in_block = false;
-                        i++;
-                    }
+                if (!inBlock && i + 1 < line.size() && line[i] == '/' && line[i + 1] == '*') {
+                    inBlock = true;
+                    i++;
+                } else if (inBlock && i + 1 < line.size() && line[i] == '*' && line[i + 1] == '/') {
+                    inBlock = false;
+                    i++;
+                } else if (!inBlock && i + 1 < line.size() && line[i] == '/' && line[i + 1] == '/') {
+                    break;
+                } else if (!inBlock) {
+                    newLine += line[i];
                 }
                 i++;
             }
-            if (!in_block && !newline.empty()) {
-                res.push_back(newline);
-                newline = "";
+            if (!inBlock && !newLine.empty()) {
+                result.push_back(newLine);
             }
         }
-        return res;
+        return result;
     }
 };
 ```
+
+### Time and Space Complexity
+
+- **Time Complexity:** O(n * m)
+- **Space Complexity:** O(n * m)
 
 ### Java
 
 ```java
 class Solution {
     public List<String> removeComments(String[] source) {
-        List<String> res = new ArrayList<>();
+        List<String> result = new ArrayList<>();
         boolean inBlock = false;
-        StringBuilder newline = new StringBuilder();
-        
+        StringBuilder newLine = new StringBuilder();
         for (String line : source) {
             int i = 0;
+            if (!inBlock) newLine = new StringBuilder();
             while (i < line.length()) {
-                if (!inBlock) {
-                    if (i + 1 < line.length() && line.charAt(i) == '/' && line.charAt(i + 1) == '*') {
-                        inBlock = true;
-                        i++;
-                    } else if (i + 1 < line.length() && line.charAt(i) == '/' && line.charAt(i + 1) == '/') {
-                        break;
-                    } else {
-                        newline.append(line.charAt(i));
-                    }
-                } else {
-                    if (i + 1 < line.length() && line.charAt(i) == '*' && line.charAt(i + 1) == '/') {
-                        inBlock = false;
-                        i++;
-                    }
+                if (!inBlock && i + 1 < line.length() && line.charAt(i) == '/' && line.charAt(i + 1) == '*') {
+                    inBlock = true;
+                    i++;
+                } else if (inBlock && i + 1 < line.length() && line.charAt(i) == '*' && line.charAt(i + 1) == '/') {
+                    inBlock = false;
+                    i++;
+                } else if (!inBlock && i + 1 < line.length() && line.charAt(i) == '/' && line.charAt(i + 1) == '/') {
+                    break;
+                } else if (!inBlock) {
+                    newLine.append(line.charAt(i));
                 }
                 i++;
             }
-            if (!inBlock && newline.length() > 0) {
-                res.add(newline.toString());
-                newline = new StringBuilder();
+            if (!inBlock && newLine.length() > 0) {
+                result.add(newLine.toString());
             }
         }
-        return res;
+        return result;
     }
 }
 ```
+
+### Time and Space Complexity
+
+- **Time Complexity:** O(n * m)
+- **Space Complexity:** O(n * m)
 
 ### Python
 
@@ -203,152 +201,153 @@ class Solution(object):
         :type source: List[str]
         :rtype: List[str]
         """
+        result = []
         in_block = False
-        newline = []
-        res = []
-        
+        new_line = []
         for line in source:
             i = 0
+            if not in_block:
+                new_line = []
             while i < len(line):
-                if not in_block:
-                    if i + 1 < len(line) and line[i:i+2] == "/*":
-                        in_block = True
-                        i += 1
-                    elif i + 1 < len(line) and line[i:i+2] == "//":
-                        break
-                    else:
-                        newline.append(line[i])
-                else:
-                    if i + 1 < len(line) and line[i:i+2] == "*/":
-                        in_block = False
-                        i += 1
+                if not in_block and line[i:i+2] == '/*':
+                    in_block = True
+                    i += 1
+                elif in_block and line[i:i+2] == '*/':
+                    in_block = False
+                    i += 1
+                elif not in_block and line[i:i+2] == '//':
+                    break
+                elif not in_block:
+                    new_line.append(line[i])
                 i += 1
-            
-            if not in_block and newline:
-                res.append("".join(newline))
-                newline = []
-                
-        return res
+            if not in_block and new_line:
+                result.append("".join(new_line))
+        return result
 ```
+
+### Time and Space Complexity
+
+- **Time Complexity:** O(n * m)
+- **Space Complexity:** O(n * m)
 
 ### Python3
 
 ```python
 class Solution:
     def removeComments(self, source: List[str]) -> List[str]:
+        result = []
         in_block = False
-        newline = []
-        res = []
-        
+        new_line = []
         for line in source:
             i = 0
+            if not in_block:
+                new_line = []
             while i < len(line):
-                if not in_block:
-                    if i + 1 < len(line) and line[i:i+2] == "/*":
-                        in_block = True
-                        i += 1
-                    elif i + 1 < len(line) and line[i:i+2] == "//":
-                        break
-                    else:
-                        newline.append(line[i])
-                else:
-                    if i + 1 < len(line) and line[i:i+2] == "*/":
-                        in_block = False
-                        i += 1
+                if not in_block and line[i:i+2] == '/*':
+                    in_block = True
+                    i += 1
+                elif in_block and line[i:i+2] == '*/':
+                    in_block = False
+                    i += 1
+                elif not in_block and line[i:i+2] == '//':
+                    break
+                elif not in_block:
+                    new_line.append(line[i])
                 i += 1
-            
-            if not in_block and newline:
-                res.append("".join(newline))
-                newline = []
-                
-        return res
+            if not in_block and new_line:
+                result.append("".join(new_line))
+        return result
 ```
+
+### Time and Space Complexity
+
+- **Time Complexity:** O(n * m)
+- **Space Complexity:** O(n * m)
 
 ### C
 
 ```c
-/**
- * Note: The returned array must be malloced, assume caller calls free().
- */
+#include <stdlib.h>
+#include <string.h>
+
 char** removeComments(char** source, int sourceSize, int* returnSize) {
-    int returnCap = sourceSize;
-    char** result = (char**)malloc(returnCap * sizeof(char*));
-    *returnSize = 0;
-    int in_block = 0;
-    char buffer[81];
-    int k = 0;
-    
-    for (int i = 0; i < sourceSize; ++i) {
-        int j = 0;
-        while (source[i][j] != '\0') {
-            if (!in_block) {
-                if (source[i][j] == '/' && source[i][j + 1] == '*') {
-                    in_block = 1;
-                    ++j;
-                } else if (source[i][j] == '/' && source[i][j + 1] == '/') {
-                    break;
-                } else {
-                    buffer[k++] = source[i][j];
-                }
-            } else {
-                if (source[i][j] == '*' && source[i][j + 1] == '/') {
-                    in_block = 0;
-                    ++j;
-                }
+    char** result = (char**)malloc(sourceSize * sizeof(char*));
+    int count = 0;
+    int inBlock = 0;
+    char* newLine = (char*)malloc(81 * sizeof(char));
+    for (int k = 0; k < sourceSize; k++) {
+        int i = 0, j = 0;
+        if (!inBlock) j = 0;
+        while (source[k][i]) {
+            if (!inBlock && source[k][i] == '/' && source[k][i + 1] == '*') {
+                inBlock = 1;
+                i++;
+            } else if (inBlock && source[k][i] == '*' && source[k][i + 1] == '/') {
+                inBlock = 0;
+                i++;
+            } else if (!inBlock && source[k][i] == '/' && source[k][i + 1] == '/') {
+                break;
+            } else if (!inBlock) {
+                newLine[j++] = source[k][i];
             }
-            ++j;
+            i++;
         }
-        
-        if (!in_block && k > 0) {
-            buffer[k] = '\0';
-            result[*returnSize] = (char*)malloc((k + 1) * sizeof(char));
-            strcpy(result[*returnSize], buffer);
-            ++(*returnSize);
-            k = 0;
+        if (!inBlock && j > 0) {
+            newLine[j] = '\0';
+            result[count] = (char*)malloc((j + 1) * sizeof(char));
+            strcpy(result[count], newLine);
+            count++;
         }
     }
+    free(newLine);
+    *returnSize = count;
     return result;
 }
 ```
+
+### Time and Space Complexity
+
+- **Time Complexity:** O(n * m)
+- **Space Complexity:** O(n * m)
 
 ### C#
 
 ```csharp
 public class Solution {
     public IList<string> RemoveComments(string[] source) {
-        var res = new List<string>();
+        IList<string> result = new List<string>();
         bool inBlock = false;
-        var newline = new StringBuilder();
-        
-        foreach (var line in source) {
+        StringBuilder newLine = new StringBuilder();
+        foreach (string line in source) {
             int i = 0;
+            if (!inBlock) newLine.Clear();
             while (i < line.Length) {
-                if (!inBlock) {
-                    if (i + 1 < line.Length && line[i] == '/' && line[i + 1] == '*') {
-                        inBlock = true;
-                        i++;
-                    } else if (i + 1 < line.Length && line[i] == '/' && line[i + 1] == '/') {
-                        break;
-                    } else {
-                        newline.Append(line[i]);
-                    }
-                } else {
-                    if (i + 1 < line.Length && line[i] == '*' && line[i + 1] == '/') {
-                        inBlock = false;
-                        i++;
-                    }
+                if (!inBlock && i + 1 < line.Length && line[i] == '/' && line[i + 1] == '*') {
+                    inBlock = true;
+                    i++;
+                } else if (inBlock && i + 1 < line.Length && line[i] == '*' && line[i + 1] == '/') {
+                    inBlock = false;
+                    i++;
+                } else if (!inBlock && i + 1 < line.Length && line[i] == '/' && line[i + 1] == '/') {
+                    break;
+                } else if (!inBlock) {
+                    newLine.Append(line[i]);
                 }
                 i++;
             }
-            if (!inBlock && newline.Length > 0) {
-                res.Add(newline.ToString());
-                newline.Clear();
+            if (!inBlock && newLine.Length > 0) {
+                result.Add(newLine.ToString());
             }
         }
-        return res;
+        return result;
     }
 }
 ```
+
+### Time and Space Complexity
+
+- **Time Complexity:** O(n * m)
+- **Space Complexity:** O(n * m)
 
 ### JavaScript
 
@@ -358,75 +357,75 @@ public class Solution {
  * @return {string[]}
  */
 var removeComments = function(source) {
-    const res = [];
+    let result = [];
     let inBlock = false;
-    let newline = "";
-    
+    let newLine = "";
     for (let line of source) {
         let i = 0;
+        if (!inBlock) newLine = "";
         while (i < line.length) {
-            if (!inBlock) {
-                if (i + 1 < line.length && line[i] === '/' && line[i + 1] === '*') {
-                    inBlock = true;
-                    i++;
-                } else if (i + 1 < line.length && line[i] === '/' && line[i + 1] === '/') {
-                    break;
-                } else {
-                    newline += line[i];
-                }
-            } else {
-                if (i + 1 < line.length && line[i] === '*' && line[i + 1] === '/') {
-                    inBlock = false;
-                    i++;
-                }
+            if (!inBlock && i + 1 < line.length && line[i] === '/' && line[i + 1] === '*') {
+                inBlock = true;
+                i++;
+            } else if (inBlock && i + 1 < line.length && line[i] === '*' && line[i + 1] === '/') {
+                inBlock = false;
+                i++;
+            } else if (!inBlock && i + 1 < line.length && line[i] === '/' && line[i + 1] === '/') {
+                break;
+            } else if (!inBlock) {
+                newLine += line[i];
             }
             i++;
         }
-        if (!inBlock && newline.length > 0) {
-            res.push(newline);
-            newline = "";
+        if (!inBlock && newLine.length > 0) {
+            result.push(newLine);
         }
     }
-    return res;
+    return result;
 };
 ```
+
+### Time and Space Complexity
+
+- **Time Complexity:** O(n * m)
+- **Space Complexity:** O(n * m)
 
 ### TypeScript
 
 ```typescript
 function removeComments(source: string[]): string[] {
-    const res: string[] = [];
+    let result: string[] = [];
     let inBlock: boolean = false;
-    let newline: string = "";
-    
+    let newLine: string = "";
     for (let line of source) {
-        let i: number = 0;
+        let i = 0;
+        if (!inBlock) newLine = "";
         while (i < line.length) {
-            if (!inBlock) {
-                if (i + 1 < line.length && line[i] === '/' && line[i + 1] === '*') {
-                    inBlock = true;
-                    i++;
-                } else if (i + 1 < line.length && line[i] === '/' && line[i + 1] === '/') {
-                    break;
-                } else {
-                    newline += line[i];
-                }
-            } else {
-                if (i + 1 < line.length && line[i] === '*' && line[i + 1] === '/') {
-                    inBlock = false;
-                    i++;
-                }
+            if (!inBlock && i + 1 < line.length && line[i] === '/' && line[i + 1] === '*') {
+                inBlock = true;
+                i++;
+            } else if (inBlock && i + 1 < line.length && line[i] === '*' && line[i + 1] === '/') {
+                inBlock = false;
+                i++;
+            } else if (!inBlock && i + 1 < line.length && line[i] === '/' && line[i + 1] === '/') {
+                break;
+            } else if (!inBlock) {
+                newLine += line[i];
             }
             i++;
         }
-        if (!inBlock && newline.length > 0) {
-            res.push(newline);
-            newline = "";
+        if (!inBlock && newLine.length > 0) {
+            result.push(newLine);
         }
     }
-    return res;
-};
+    return result;
+}
 ```
+
+### Time and Space Complexity
+
+- **Time Complexity:** O(n * m)
+- **Space Complexity:** O(n * m)
 
 ### PHP
 
@@ -438,197 +437,195 @@ class Solution {
      * @return String[]
      */
     function removeComments($source) {
-        $res = [];
-        $in_block = false;
-        $newline = "";
-        
+        $result = [];
+        $inBlock = false;
+        $newLine = "";
         foreach ($source as $line) {
             $i = 0;
+            if (!$inBlock) $newLine = "";
             while ($i < strlen($line)) {
-                if (!$in_block) {
-                    if ($i + 1 < strlen($line) && $line[$i] == '/' && $line[$i + 1] == '*') {
-                        $in_block = true;
-                        $i++;
-                    } else if ($i + 1 < strlen($line) && $line[$i] == '/' && $line[$i + 1] == '/') {
-                        break;
-                    } else {
-                        $newline .= $line[$i];
-                    }
-                } else {
-                    if ($i + 1 < strlen($line) && $line[$i] == '*' && $line[$i + 1] == '/') {
-                        $in_block = false;
-                        $i++;
-                    }
+                if (!$inBlock && $line[$i] == '/' && $line[$i+1] == '*') {
+                    $inBlock = true;
+                    $i++;
+                } else if ($inBlock && $line[$i] == '*' && $line[$i+1] == '/') {
+                    $inBlock = false;
+                    $i++;
+                } else if (!$inBlock && $line[$i] == '/' && $line[$i+1] == '/') {
+                    break;
+                } else if (!$inBlock) {
+                    $newLine .= $line[$i];
                 }
                 $i++;
             }
-            if (!$in_block && strlen($newline) > 0) {
-                array_push($res, $newline);
-                $newline = "";
+            if (!$inBlock && strlen($newLine) > 0) {
+                $result[] = $newLine;
             }
         }
-        return $res;
+        return $result;
     }
 }
 ```
+
+### Time and Space Complexity
+
+- **Time Complexity:** O(n * m)
+- **Space Complexity:** O(n * m)
 
 ### Swift
 
 ```swift
 class Solution {
     func removeComments(_ source: [String]) -> [String] {
-        var res = [String]()
+        var result = [String]()
         var inBlock = false
         var newLine = ""
-        
         for line in source {
-            var i = 0
-            while i < line.count {
-                let charArray = Array(line)
-                
-                if !inBlock {
-                    if i + 1 < charArray.count && charArray[i] == "/" && charArray[i + 1] == "*" {
-                        inBlock = true
-                        i += 1
-                    } else if i + 1 < charArray.count && charArray[i] == "/" && charArray[i + 1] == "/" {
-                        break
-                    } else {
-                        newLine.append(charArray[i])
-                    }
-                } else {
-                    if i + 1 < charArray.count && charArray[i] == "*" && charArray[i + 1] == "/" {
-                        inBlock = false
-                        i += 1
-                    }
+            var i = line.startIndex
+            if !inBlock { newLine = "" }
+            while i < line.endIndex {
+                if !inBlock && i < line.index(before: line.endIndex) && line[i] == "/" && line[line.index(after: i)] == "*" {
+                    inBlock = true
+                    i = line.index(after: i)
+                } else if inBlock && i < line.index(before: line.endIndex) && line[i] == "*" && line[line.index(after: i)] == "/" {
+                    inBlock = false
+                    i = line.index(after: i)
+                } else if !inBlock && i < line.index(before: line.endIndex) && line[i] == "/" && line[line.index(after: i)] == "/" {
+                    break
+                } else if !inBlock {
+                    newLine.append(line[i])
                 }
-                i += 1
+                i = line.index(after: i)
             }
-            
             if !inBlock && !newLine.isEmpty {
-                res.append(newLine)
-                newLine = ""
+                result.append(newLine)
             }
         }
-        return res
+        return result
     }
 }
 ```
+
+### Time and Space Complexity
+
+- **Time Complexity:** O(n * m)
+- **Space Complexity:** O(n * m)
 
 ### Kotlin
 
 ```kotlin
 class Solution {
     fun removeComments(source: Array<String>): List<String> {
-        val res = mutableListOf<String>()
+        val result = mutableListOf<String>()
         var inBlock = false
-        var newline = StringBuilder()
-        
+        var newLine = StringBuilder()
         for (line in source) {
             var i = 0
+            if (!inBlock) newLine = StringBuilder()
             while (i < line.length) {
-                if (!inBlock) {
-                    if (i + 1 < line.length && line[i] == '/' && line[i + 1] == '*') {
-                        inBlock = true
-                        i++
-                    } else if (i + 1 < line.length && line[i] == '/' && line[i + 1] == '/') {
-                        break
-                    } else {
-                        newline.append(line[i])
-                    }
-                } else {
-                    if (i + 1 < line.length && line[i] == '*' && line[i + 1] == '/') {
-                        inBlock = false
-                        i++
-                    }
+                if (!inBlock && i + 1 < line.length && line[i] == '/' && line[i + 1] == '*') {
+                    inBlock = true
+                    i++
+                } else if (inBlock && i + 1 < line.length && line[i] == '*' && line[i + 1] == '/') {
+                    inBlock = false
+                    i++
+                } else if (!inBlock && i + 1 < line.length && line[i] == '/' && line[i + 1] == '/') {
+                    break
+                } else if (!inBlock) {
+                    newLine.append(line[i])
                 }
                 i++
             }
-            if (!inBlock && newline.isNotEmpty()) {
-                res.add(newline.toString())
-                newline = StringBuilder()
+            if (!inBlock && newLine.isNotEmpty()) {
+                result.add(newLine.toString())
             }
         }
-        return res
+        return result
     }
 }
 ```
+
+### Time and Space Complexity
+
+- **Time Complexity:** O(n * m)
+- **Space Complexity:** O(n * m)
 
 ### Dart
 
 ```dart
 class Solution {
   List<String> removeComments(List<String> source) {
-    List<String> res = [];
+    List<String> result = [];
     bool inBlock = false;
-    String lineBuffer = '';
-    
+    StringBuffer newLine = StringBuffer();
     for (String line in source) {
-      int i = 0;
-      while (i < line.length) {
-        if (!inBlock) {
-          if (i + 1 < line.length && line.substring(i, i+2) == '/*') {
-            inBlock = true;
+        int i = 0;
+        if (!inBlock) newLine.clear();
+        while (i < line.length) {
+            if (!inBlock && i + 1 < line.length && line[i] == '/' && line[i + 1] == '*') {
+                inBlock = true;
+                i++;
+            } else if (inBlock && i + 1 < line.length && line[i] == '*' && line[i + 1] == '/') {
+                inBlock = false;
+                i++;
+            } else if (!inBlock && i + 1 < line.length && line[i] == '/' && line[i + 1] == '/') {
+                break;
+            } else if (!inBlock) {
+                newLine.write(line[i]);
+            }
             i++;
-          } else if (i + 1 < line.length && line.substring(i, i+2) == '//') {
-            break;
-          } else {
-            lineBuffer += line[i];
-          }
-        } else {
-          if (i + 1 < line.length && line.substring(i, i+2) == '*/') {
-            inBlock = false;
-            i++;
-          }
         }
-        i++;
-      }
-      
-      if (!inBlock && lineBuffer.isNotEmpty) {
-        res.add(lineBuffer);
-        lineBuffer = '';
-      }
+        if (!inBlock && newLine.length > 0) {
+            result.add(newLine.toString());
+        }
     }
-    return res;
+    return result;
   }
 }
 ```
+
+### Time and Space Complexity
+
+- **Time Complexity:** O(n * m)
+- **Space Complexity:** O(n * m)
 
 ### Go
 
 ```go
 func removeComments(source []string) []string {
-    res := []string{}
+    result := []string{}
     inBlock := false
-    var newline []byte
-
+    var newLine string
     for _, line := range source {
         i := 0
+        if !inBlock {
+            newLine = ""
+        }
         for i < len(line) {
-            if !inBlock {
-                if i + 1 < len(line) && line[i] == '/' && line[i + 1] == '*' {
-                    inBlock = true
-                    i++
-                } else if i + 1 < len(line) && line[i] == '/' && line[i + 1] == '/' {
-                    break
-                } else {
-                    newline = append(newline, line[i])
-                }
-            } else {
-                if i + 1 < len(line) && line[i] == '*' && line[i + 1] == '/' {
-                    inBlock = false
-                    i++
-                }
+            if !inBlock && i + 1 < len(line) && line[i] == '/' && line[i + 1] == '*' {
+                inBlock = true
+                i++
+            } else if inBlock && i + 1 < len(line) && line[i] == '*' && line[i + 1] == '/' {
+                inBlock = false
+                i++
+            } else if !inBlock && i + 1 < len(line) && line[i] == '/' && line[i + 1] == '/' {
+                break
+            } else if !inBlock {
+                newLine += string(line[i])
             }
             i++
         }
-        if !inBlock && len(newline) > 0 {
-            res = append(res, string(newline))
-            newline = []byte{}
+        if !inBlock && len(newLine) > 0 {
+            result = append(result, newLine)
         }
     }
-    return res
+    return result
 }
 ```
+
+### Time and Space Complexity
+
+- **Time Complexity:** O(n * m)
+- **Space Complexity:** O(n * m)
 
 ### Ruby
 
@@ -636,158 +633,80 @@ func removeComments(source []string) []string {
 # @param {String[]} source
 # @return {String[]}
 def remove_comments(source)
-    res = []
+    result = []
     in_block = false
-    newline = ""
-    
+    new_line = []
     source.each do |line|
         i = 0
+        if !in_block
+            new_line = []
+        end
         while i < line.length
-            if !in_block
-                if i + 1 < line.length && line[i..i+1] == "/*"
-                    in_block = true
-                    i += 1
-                elsif i + 1 < line.length && line[i..i+1] == "//"
-                    break
-                else
-                    newline << line[i]
-                end
-            else
-                if i + 1 < line.length && line[i..i+1] == "*/"
-                    in_block = false
-                    i += 1
-                end
+            if !in_block && i + 1 < line.length && line[i] == '/' && line[i + 1] == '*'
+                in_block = true
+                i += 1
+            elsif in_block && i + 1 < line.length && line[i] == '*' && line[i + 1] == '/'
+                in_block = false
+                i += 1
+            elsif !in_block && i + 1 < line.length && line[i] == '/' && line[i + 1] == '/'
+                break
+            elsif !in_block
+                new_line << line[i]
             end
             i += 1
         end
-        if !in_block && !newline.empty?
-            res << newline
-            newline = ""
+        if !in_block && !new_line.empty?
+            result << new_line.join('')
         end
     end
-    res
+    result
 end
 ```
 
-### Scala
+### Time and Space Complexity
 
-```scala
-object Solution {
-    def removeComments(source: Array[String]): List[String] = {
-        var inBlock = false
-        var newline = new StringBuilder
-        var res = List[String]()
-        
-        for (line <- source) {
-            var i = 0
-            while (i < line.length) {
-                if (!inBlock) {
-                    if (i + 1 < line.length && line.substring(i, i+2) == "/*") {
-                        inBlock = true
-                        i += 1
-                    } else if (i + 1 < line.length && line.substring(i, i+2) == "//") {
-                        break
-                    } else {
-                        newline.append(line.charAt(i))
-                    }
-                } else {
-                    if (i + 1 < line.length && line.substring(i, i+2) == "*/") {
-                        inBlock = false
-                        i += 1
-                    }
-                }
-                i += 1
-            }
-            if (!inBlock && newline.nonEmpty) {
-                res :+= newline.toString
-                newline = new StringBuilder
-            }
-        }
-        res
-    }
-}
-```
-
-### Rust
-
-```rust
-impl Solution {
-    pub fn remove_comments(source: Vec<String>) -> Vec<String> {
-        let mut res: Vec<String> = Vec::new();
-        let mut in_block: bool = false;
-        let mut newline = String::new();
-
-        for line in source {
-            let mut i = 0;
-            let chars: Vec<char> = line.chars().collect();
-            
-            while i < chars.len() {
-                if !in_block {
-                    if i + 1 < chars.len() && chars[i] == '/' && chars[i + 1] == '*' {
-                        in_block = true;
-                        i += 1;
-                    } else if i + 1 < chars.len() && chars[i] == '/' && chars[i + 1] == '/' {
-                        break;
-                    } else {
-                        newline.push(chars[i]);
-                    }
-                } else {
-                    if i + 1 < chars.len() && chars[i] == '*' && chars[i + 1] == '/' {
-                        in_block = false;
-                        i += 1;
-                    }
-                }
-                i += 1;
-            }
-
-            if !in_block && newline.len() > 0 {
-                res.push(newline.clone());
-                newline = String::new();
-            }
-        }
-        res
-    }
-}
-```
+- **Time Complexity:** O(n * m)
+- **Space Complexity:** O(n * m)
 
 
-### Closing Statement
+### Closing Statement for the Discussion
 
-**Interviewer:** Well done! You have successfully implemented the solution to remove comments from C++ code in multiple programming languages. Your approach handles both single-line and block comments efficiently, and you've ensured that the time and space complexities are linear with respect to the input size. Great job breaking down the problem and systematically building up the solution. This problem really tests the understanding of string manipulation and handling nested conditions, and you have showcased strong problem-solving skills.
+"Thank you for walking through your solution to the problem of removing comments from a C++ program. You clearly defined the problem and explored a brute-force approach before optimizing it for better performance. You explained the time and space complexities well and your implementation in multiple programming languages demonstrates a strong understanding of different syntactic environments.
 
-**Interviewee:** Thank you! It was indeed a challenging but enjoyable problem. Handling different types of comments and ensuring the solution is optimal in multiple environments was a good exercise. I'm glad we could go through the brute force approach and then optimize it. I appreciate the opportunity to work on this problem.
+This question helps in understanding how we can efficiently manipulate and process strings while adhering to specific rules and conditions. It's also a great example of handling edge cases and maintaining the state across different iterations.
 
-**Interviewer:** Excellent. To further practice and strengthen your understanding, here are some similar questions you might find interesting:
+Overall, your approach and the final solution were well thought out and effectively solved the problem. Great job!"
 
 ### Similar Questions
 
-1. **Remove Comments from JavaScript Code:** Given JavaScript code, remove comments (both single-line `//` and multi-line `/* */` comments) and return the cleaned code.
+1. **Remove HTML Tags:**
+   Given a string containing HTML content, write a function to remove all HTML tags and return only the text content.
 
-2. **HTML Comment Removal:**
-   Write a function to remove HTML comments (`<!-- ... -->`) from an HTML document and return the cleaned HTML.
+2. **JSON Parser:**
+   Design a JSON parser that can parse a JSON string into its corresponding data structures.
 
-3. **Remove Comments from SQL Script:** 
-   Given a SQL script, remove both single-line (`--`) and multi-line (`/* ... */`) comments.
+3. **SQL Query Parser:**
+   Write a parser that can remove comments from a SQL query, where both single-line (`--`) and multi-line (`/* */`) comments need to be handled.
 
-4. **Python Comment Remover:** 
-   Remove Python comments from a given Python script. Consider both single-line comments that start with `#` and block comments enclosed in triple quotes (`''' ... '''`).
+4. **Basic Calculator:**
+   Implement a basic calculator to evaluate a simple expression string, which includes integers, '+', '-', '*', and '/' operators, and ignores any spaces.
 
-5. **Balanced Parentheses:** 
-   Given a string containing only parentheses, determine if the string contains balanced parentheses.
+5. **XML Validator:**
+   Write a function to validate if a given string is a valid XML or not. The string may contain nested XML tags.
 
-6. **Longest Substring Without Repeating Characters:** 
-   Find the length of the longest substring without repeating characters in a given string.
+6. **Markdown to HTML Converter:**
+   Create a function that converts a string written in markdown syntax to HTML.
 
-7. **Valid Parentheses:**
-   Given a string containing just the characters `'(', ')', '{', '}', '[' and ']'`, determine if the input string is valid (check if the parentheses are closed in the correct order).
+7. **Microservice Request Logger:**
+   Implement a function that takes log entries from a microservice and removes all sensitive information like passwords and tokens while keeping the useful log data.
 
-8. **Split CSV Fields:** 
-   Write a function to split a CSV line into fields, considering the quotes and escapes properly.
+8. **CSS Minifier:**
+   Write a function to minify a CSS file by removing all comments and unnecessary whitespace.
 
-9. **URL Decoder and Encoder:**
-   Implement functions to encode and decode URLs, handling special characters appropriately.
+9. **Config File Cleaner:**
+   Given a configuration file with comments (single line and multi-line), write a function to remove all comments from the file and return the cleaned version.
 
-10. **String Compression:** 
-   Implement a basic string compression algorithm using the counts of repeated characters (e.g., `aaa` becomes `a3`).
+10. **Text Formatter:**
+    Write a function that formats code by following specific style guidelines (e.g., indentations, spaces between operators), which also includes removing comments and adding or removing spaces where necessary.
 
-These problems will reinforce your string manipulation skills and expand your understanding of handling different types of structured data and text processing. Keep practicing, and you'll continue to improve your proficiency in solving these types of problems.
+These questions test a candidate's ability to process and manipulate strings, handle various types of delimiters and nested structures, and ensure correct logic flow and state management.
