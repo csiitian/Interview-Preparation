@@ -1,6 +1,6 @@
 ### Interviewer and Interviewee Discussion
 
-**Interviewer:** Let's discuss the problem statement we have. You are given an undirected tree with \( n \) nodes. Each node has a value, and you're given an edge list along with a positive integer \( k \). For any selected edge [u, v], you can update their node values as \( nums[u] = nums[u] \oplus k \) and \( nums[v] = nums[v] \oplus k \). You can perform this operation multiple times to achieve the maximum possible sum of the node values. Could you outline your thoughts on approaching this problem?
+**Interviewer:** Let's discuss the problem statement we have. You are given an undirected tree with \( n \) nodes. Each node has a value, and you're given an edge list along with a positive integer \( k \). For any selected edge [u, v], you can update their node values as \( nums[u] = nums[u] ^ k \) and \( nums[v] = nums[v] ^ k \). You can perform this operation multiple times to achieve the maximum possible sum of the node values. Could you outline your thoughts on approaching this problem?
 
 **Interviewee:** Sure. Since we need to maximize the sum of node values, the first thing that comes to mind is exploring how the XOR operation with \( k \) impacts each node value. Ideally, we would like to find out if there's a way to determine if applying the XOR operation will consistently lead to higher sums for nodes.
 
@@ -14,7 +14,7 @@
 2. For each edge, perform the XOR operation on its nodes and check the new sum.
 3. Repeat this process for possibly multiple rounds until no improvement is seen.
 
-However, this approach could be very inefficient since we might end up performing many redundant calculations especially considering constraints with \( n \) up to \( 2 \times 10^4 \).
+However, this approach could be very inefficient since we might end up performing many redundant calculations especially considering constraints with \( n \) up to \( 2 * 10^4 \).
 
 **Interviewer:** That's correct. The brute force method may become infeasible due to the number of operations. Can you estimate the time and space complexity of this brute force approach?
 
@@ -27,7 +27,7 @@ However, this approach could be very inefficient since we might end up performin
 
 ### Optimized Approach
 
-**Interviewee:** For optimizing the approach, let's consider the properties of the XOR operation. An important observation is that XOR-ing a number twice with the same value restores the original number (i.e., \( x \oplus k \oplus k = x \)).
+**Interviewee:** For optimizing the approach, let's consider the properties of the XOR operation. An important observation is that XOR-ing a number twice with the same value restores the original number (i.e., \( x ^ k ^ k = x \)).
 
 Thus, each node value has two potential states: the original state and the XOR-ed state with \( k \). This gives us a hint. We should calculate the sum assuming all nodes are in the original state and then explore the maximum possible sum of nodes in the XOR-ed state if it provides a higher value.
 
