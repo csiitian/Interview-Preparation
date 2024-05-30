@@ -1,4 +1,28 @@
-#### Interviewer and Interviewee Discussion
+### XOR Properties
+
+#### Self-Inverse Property
+\[ a ^ a = 0 \]
+Any number XOR-ed with itself results in zero.
+
+#### Identity Property
+\[ a ^ 0 = a \]
+Any number XOR-ed with zero remains unchanged.
+
+#### Commutative Property
+\[ a ^ b = b ^ a \]
+The order of the operands does not matter in XOR.
+
+#### Associative Property
+\[ a ^ (b ^ c) = (a ^ b) ^ c \]
+XOR operations can be grouped in any order.
+
+#### Inversion Property
+If \[ c = a ^ b \], then \[ a = b ^ c \] and \[ b = a ^ c \].
+This property is useful for finding missing elements.
+
+Let's Start
+
+### Interviewer and Interviewee Discussion
 
 **Interviewer**: Let's discuss a problem where you need to count the number of triplets `(i, j, k)` in an array where `(0 <= i < j <= k < arr.length)` and `a == b` with `a` and `b` defined using bitwise XOR. Given an array, you need to find all such triplets.
 
