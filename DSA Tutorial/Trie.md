@@ -97,5 +97,20 @@ class Trie {
         }
         return true;
     }
+
+    public String findShortedPrefix(String word) {
+        TrieNode curr = root;
+        for(int i=0;i<word.length();i++) {
+            int index = word.charAt(i) - 'a';
+            if(curr.children[index] == null) {
+                return "";
+            }
+            curr = curr.children[index];
+            if(curr.isEndOfWord) {
+                return word.substring(0, i+1);
+            }
+        }
+        return "";
+    }
 }
 ```
