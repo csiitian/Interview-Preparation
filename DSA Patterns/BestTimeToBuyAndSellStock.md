@@ -14,6 +14,8 @@ class Solution {
 }
 ```
 
+---
+
 # Best Time to Buy and Sell Stock II
 
 ```java
@@ -32,8 +34,41 @@ class Solution {
 }
 ```
 
+---
+
 # Best Time to Buy and Sell Stock III
- 
+
+### Top Down
+```java
+class Solution {
+    Integer[][][] memo;
+    public int maxProfit(int[] prices) {
+        int n = prices.length;
+        memo = new Integer[n][2][2];
+        return helper(prices, 0, 0, 0);
+    }
+
+    public int helper(int[] prices, int curr, int buy, int total) {
+        if(total == 2) return 0;
+        if(curr >= prices.length) return 0;
+        if(memo[curr][buy][total] != null) return memo[curr][buy][total];
+        if(buy == 1) {
+            return memo[curr][buy][total] = Math.max(
+                prices[curr] + helper(prices, curr+1, 0, total+1),
+                helper(prices, curr+1, 1, total)
+            );
+        } else {
+            return memo[curr][buy][total] = Math.max(
+                -prices[curr] + helper(prices, curr+1, 1, total),
+                helper(prices, curr+1, 0, total)
+            );
+        }
+    }
+}
+```
+
+### Prefix / Suffix Array Approach
+
 ```java
 class Solution {
     public int maxProfit(int[] prices) {
@@ -61,6 +96,8 @@ class Solution {
     }
 }
 ```
+
+---
 
 # Best Time to Buy and Sell Stock IV
 
@@ -96,6 +133,8 @@ class Solution {
     }
 }
 ```
+
+---
 
 # Maximum Profit From Trading Stocks
 
