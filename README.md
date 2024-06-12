@@ -1,45 +1,58 @@
-# LeetCode Solutions
+# Interview Preparation Repository
 
-Welcome to the LeetCode Solutions repository! This repository contains a collection of solutions to various LeetCode problems, presented in an Interview Discussion format.
+Welcome to the Interview Preparation repository! This repository is designed to help you prepare for technical interviews, specifically focusing on software engineering roles. Here, you will find a curated collection of resources, study guides, and practice materials to enhance your interview readiness.
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Structure](#structure)
-- [Usage](#usage)
+- [Overview](#overview)
+- [Resources](#resources)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Introduction
+## Overview
 
-LeetCode is a platform for preparing technical coding interviews. It provides a vast collection of coding challenges that cover a wide range of algorithms and data structures. This repository aims to provide well-documented solutions to these problems, helping you to prepare effectively for coding interviews.
+This repository aims to provide comprehensive preparation materials for software engineering interviews. Whether you are preparing for your first interview or looking to refresh your skills, this repository offers valuable resources and practice problems.
 
-## Structure
+## Resources
 
-Each solution is organized in a directory corresponding to its problem number and title. The solutions are written in Markdown format, providing a detailed explanation of the approach, time and space complexity analysis, and the solution code.
+### Companies and Career Portals
 
+We have compiled a list of top companies along with their career portals to help you find opportunities and prepare for specific companies.
 
-## Usage
+- [Top 100 Companies](companies.md)
 
-To use this repository, simply navigate to the problem you are interested in and open the corresponding Markdown file. Each file contains:
+### LeetCode Interview Approach
 
-- Problem statement
-- Approach and explanation
-- Solution code
-- Complexity analysis
+This directory includes various approaches and strategies to tackle LeetCode problems effectively.
 
-This structured approach will help you understand the problem-solving techniques and apply them to similar problems.
+- [LeetCode Interview Approach](Leetcode-Interview-Approach)
+
+### DSA Patterns
+
+Understanding different DSA (Data Structures and Algorithms) patterns is crucial for technical interviews. This directory includes various DSA patterns and related problems.
+
+- [DSA Patterns](DSA-Patterns)
+
+### DSA Templates
+
+- [DSA Templates](DSA-Templates)
 
 ## Contributing
 
-Contributions are welcome! If you have a better solution or an alternative approach to a problem, please feel free to open a pull request. Make sure to follow the existing format for consistency.
+We welcome contributions from the community to help make this repository more comprehensive and up-to-date. If you have any resources, practice problems, or insights to share, please follow these steps:
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingSolution`)
-3. Commit your changes (`git commit -m 'Add an amazing solution to Problem XYZ'`)
-4. Push to the branch (`git push origin feature/AmazingSolution`)
-5. Open a pull request
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeature`).
+3. Commit your changes (`git commit -am 'Add some feature'`).
+4. Push to the branch (`git push origin feature/YourFeature`).
+5. Open a Pull Request.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Happy coding and best of luck with your interviews!
+
+If you have any questions or need further assistance, feel free to open an issue or reach out to the community.
