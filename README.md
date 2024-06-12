@@ -19,7 +19,7 @@ This repository aims to provide comprehensive preparation materials for software
 
 We have compiled a list of top companies along with their career portals to help you find opportunities and prepare for specific companies.
 
-- [Top 100 Companies](companies.md)
+- [Top 100 Companies](List-of-Companies)
 
 ### LeetCode Interview Approach
 
