@@ -16,12 +16,12 @@ This repository contains implementations of various sorting algorithms in C++, P
 
 ## Algorithms
 
-- [Bubble Sort](./BubbleSort)
-- [Insertion Sort](./InsertionSort)
-- [Selection Sort](./SelectionSort)
-- [Merge Sort](./MergeSort)
-- [Quick Sort](./QuickSort)
-- [Heap Sort](./HeapSort)
-- [Counting Sort](./CountingSort)
-- [Radix Sort](./RadixSort)
-- [Bucket Sort](./BucketSort)
+- [Bubble Sort](./BubbleSort.md)
+- [Insertion Sort](./InsertionSort.md)
+- [Selection Sort](./SelectionSort.md)
+- [Merge Sort](./MergeSort.md)
+- [Quick Sort](./QuickSort.md)
+- [Heap Sort](./HeapSort.md)
+- [Counting Sort](./CountingSort.md)
+- [Radix Sort](./RadixSort.md)
+- [Bucket Sort](./BucketSort.md)
