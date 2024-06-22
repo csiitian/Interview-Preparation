@@ -1,0 +1,27 @@
+# Sorting Algorithms
+
+This repository contains implementations of various sorting algorithms in C++, Python, and Java. Below is a table comparing the different sorting algorithms based on various parameters.
+
+| Algorithm      | Time Complexity (Best) | Time Complexity (Average) | Time Complexity (Worst) | Space Complexity | Stable | In-Place |
+| -------------- | ---------------------- | ------------------------- | ----------------------- | ---------------- | ------ | -------- |
+| Bubble Sort    | O(n)                   | O(n^2)                    | O(n^2)                  | O(1)             | Yes    | Yes      |
+| Insertion Sort | O(n)                   | O(n^2)                    | O(n^2)                  | O(1)             | Yes    | Yes      |
+| Selection Sort | O(n^2)                 | O(n^2)                    | O(n^2)                  | O(1)             | No     | Yes      |
+| Merge Sort     | O(n log n)             | O(n log n)                | O(n log n)              | O(n)             | Yes    | No       |
+| Quick Sort     | O(n log n)             | O(n log n)                | O(n^2)                  | O(log n)         | No     | Yes      |
+| Heap Sort      | O(n log n)             | O(n log n)                | O(n log n)              | O(1)             | No     | Yes      |
+| Counting Sort  | O(n + k)               | O(n + k)                  | O(n + k)                | O(k)             | Yes    | No       |
+| Radix Sort     | O(nk)                  | O(nk)                     | O(nk)                   | O(n + k)         | Yes    | No       |
+| Bucket Sort    | O(n + k)               | O(n + k)                  | O(n^2)                  | O(n + k)         | Yes    | No       |
+
+## Algorithms
+
+- [Bubble Sort](./BubbleSort)
+- [Insertion Sort](./InsertionSort)
+- [Selection Sort](./SelectionSort)
+- [Merge Sort](./MergeSort)
+- [Quick Sort](./QuickSort)
+- [Heap Sort](./HeapSort)
+- [Counting Sort](./CountingSort)
+- [Radix Sort](./RadixSort)
+- [Bucket Sort](./BucketSort)
