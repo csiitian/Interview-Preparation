@@ -148,3 +148,31 @@ class Solution {
     }
 }
 ```
+
+# 1220. Count Vowels Permutation
+
+If you understand this, then you are good for this type of patterns.
+
+Here we have 5 stats ( a, e, i, o, u ).
+
+```java
+class Solution {
+    public int countVowelPermutation(int n) {
+        long mod = (long) 1e9 + 7;
+        long a = 1, e = 1, i = 1, o = 1, u = 1;
+        for(int k=1;k<n;k++) {
+            long newA = ( ( e%mod + u%mod ) % mod + i%mod ) % mod;
+            long newE = ( a%mod + i%mod ) % mod;
+            long newI = ( e%mod + o%mod ) % mod;
+            long newO = i;
+            long newU = ( o%mod + i%mod ) % mod;
+            a = newA;
+            e = newE;
+            i = newI;
+            o = newO;
+            u = newU;
+        }
+        return (int)((a + e + i + o + u) % mod);
+    }
+}
+```

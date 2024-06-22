@@ -19,23 +19,23 @@ This repository aims to provide comprehensive preparation materials for software
 
 We have compiled a list of top companies along with their career portals to help you find opportunities and prepare for specific companies.
 
-- [Top 100 Companies](List-of-Companies)
+- [Top 100 Companies](List of Companies)
 
 ### LeetCode Interview Approach
 
 This directory includes various approaches and strategies to tackle LeetCode problems effectively.
 
-- [LeetCode Interview Approach](Leetcode-Interview-Approach)
+- [LeetCode Interview Approach](Interview Approach Solution)
 
 ### DSA Patterns
 
 Understanding different DSA (Data Structures and Algorithms) patterns is crucial for technical interviews. This directory includes various DSA patterns and related problems.
 
-- [DSA Patterns](DSA-Patterns)
+- [DSA Patterns](DSA/DSA-Patterns)
 
 ### DSA Templates
 
-- [DSA Templates](DSA-Templates)
+- [DSA Templates](DSA/DSA-Templates)
 
 ## Contributing
 
