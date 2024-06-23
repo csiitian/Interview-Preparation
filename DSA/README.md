@@ -72,3 +72,25 @@ I hope you become a Great Programmer one day !
 
 And also along with your learning journey, try to share your learning with others on any Platforms, Twitter, Medium or Leetcode.
 So that others can really benefit from that.
+
+Now once you read the chapters, also make sure to practice questions on that topics.
+So let's pick one topic `Stack` now go to leetcode, select `Stack` tagged questions and select difficulty as easy.
+Yes, we are going to solve `Easy` questions first and now sort it based on `Acceptance Rate`.
+The more `Acceptance Rate` means the question has been solved by many peoples successfully who have tried it.
+
+https://leetcode.com/problemset/?topicSlugs=stack&page=1&difficulty=EASY&sorting=W3sic29ydE9yZGVyIjoiREVTQ0VORElORyIsIm9yZGVyQnkiOiJBQ19SQVRFIn1d
+
+So after that my url looks like that. Now pick one by one question and start to solve them.
+
+#### What if you are not able to solve that questions ?
+Well, in that case don't worry. This will happen initially for most of the times and later also will happend but you will get habitual.
+
+So now go the `Solutions` tab. where you can find solutions with explanations.
+
+![img.png](img.png)
+
+Read them and if you don't understand just comment your query, `Author` or any other people might respond. and try to see more and more solutions till you are not satisfied.
+
+And this approach you need to repeat, that's it.
+
+And you are good for the Interview. ( Because that's the ultimate `GOAL` )
