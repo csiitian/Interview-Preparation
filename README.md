@@ -1,3 +1,6 @@
+## Leetcode Profile
+![Leetcode Solved Questions](https://leetcode-profile.vercel.app/?username=cs_iitian)
+
 # Interview Preparation Repository
 
 Welcome to the Interview Preparation repository! This repository is designed to help you prepare for technical interviews, specifically focusing on software engineering roles. Here, you will find a curated collection of resources, study guides, and practice materials to enhance your interview readiness.
