@@ -1,3 +1,11 @@
+## Fenwick Tree
+
+This is being used for Range Sum Queries.
+Alternative for this is Segment Tree. ( Which takes more memory )
+
+The major drawback for fenwick tree is that we can only use this for sum queries, while Segment Tree can be used for various type like min, max and bitwise operators.
+
+```java []
 class FenwickTree {
   int[] tree;
   int size;
@@ -43,3 +51,4 @@ public class FenwickTreeHelper {
     System.out.println(ft.sum(1, 1));
   }
 }
+```
