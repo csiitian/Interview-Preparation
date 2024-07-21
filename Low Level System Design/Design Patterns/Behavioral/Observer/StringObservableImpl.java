@@ -7,6 +7,7 @@ import java.util.Objects;
 public class StringObservableImpl implements IFObservable<String> {
     List<IFObserver> observerList = new ArrayList<>();
     String data;
+
     @Override
     public void add(IFObserver observer) {
         observerList.add(observer);

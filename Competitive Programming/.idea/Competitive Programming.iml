@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/codeforces" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/codeforces/round_955" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/codeforces/round_955/a" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/codeforces/round_955/b" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/course" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

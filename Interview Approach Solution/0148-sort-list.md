@@ -824,6 +824,6 @@ Here are some similar questions that you might find useful for practice:
 
 7. **Quick Sort**:
     - Implement the quicksort algorithm to sort an array.
-    - [GeeksforGeeks Link: QuickSort](https://www.geeksforgeeks.org/quick-sort/)
+    - [GeeksforGeeks Link: DSA.QuickSort](https://www.geeksforgeeks.org/quick-sort/)
 
 By practicing these problems, you'll reinforce your understanding of sorting algorithms and linked list manipulations, which are common topics in technical interviews. Keep coding and happy learning!

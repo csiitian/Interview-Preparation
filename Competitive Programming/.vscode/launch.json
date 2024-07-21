@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "SolutionD",
+      "request": "launch",
+      "mainClass": "SolutionD",
+      "projectName": "Competitive Programming_fb1464a9"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": ".",
+      "program": "build/Debug/outDebug"
+    }
+  ]
+}

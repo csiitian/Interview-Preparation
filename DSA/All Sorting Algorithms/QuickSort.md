@@ -1,4 +1,4 @@
-### QuickSort.md
+### DSA.QuickSort.md
 
 # Quick Sort
 
@@ -86,7 +86,7 @@ print("Sorted array is:", arr)
 ## Java
 
 ```java
-public class QuickSort {
+public class DSA.QuickSort {
     int partition(int arr[], int low, int high) {
         int pivot = arr[high];
         int i = (low - 1);
@@ -126,7 +126,7 @@ public class QuickSort {
         int arr[] = {10, 7, 8, 9, 1, 5};
         int n = arr.length;
 
-        QuickSort ob = new QuickSort();
+        DSA.QuickSort ob = new DSA.QuickSort();
         ob.sort(arr, 0, n - 1);
 
         System.out.println("Sorted array");

@@ -87,7 +87,7 @@ Well, in that case don't worry. This will happen initially for most of the times
 
 So now go the `Solutions` tab. where you can find solutions with explanations.
 
-![img.png](img.png)
+![img.png](../images/img.png)
 
 Read them and if you don't understand just comment your query, `Author` or any other people might respond. and try to see more and more solutions till you are not satisfied.
 
