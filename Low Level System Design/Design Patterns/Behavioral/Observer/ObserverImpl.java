@@ -1,21 +1,22 @@
 package design_patterns.Behavioral.Observer;
 
 public class ObserverImpl implements IFObserver {
-    String name;
-    IFObservable<String> observable;
 
-    public ObserverImpl(String name, IFObservable<String> observable) {
-        this.name = name;
-        this.observable = observable;
-    }
+  String name;
+  IFObservable<String> observable;
 
-    @Override
-    public void update() {
-        System.out.println("I am notified with latest data: " + observable.getData());
-    }
+  public ObserverImpl(String name, IFObservable<String> observable) {
+    this.name = name;
+    this.observable = observable;
+  }
 
-    @Override
-    public String getName() {
-        return name;
-    }
+  @Override
+  public void update() {
+    System.out.println("I am notified with latest data: " + observable.getData());
+  }
+
+  @Override
+  public String getName() {
+    return name;
+  }
 }
