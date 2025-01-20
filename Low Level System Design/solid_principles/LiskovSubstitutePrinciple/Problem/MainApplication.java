@@ -1,4 +1,4 @@
-package design_patterns.SolidPrinciples.LiskovSubstitutePrinciple.Problem;
+package solid_principles.LiskovSubstitutePrinciple.Problem;
 
 import java.util.ArrayList;
 import java.util.List;
