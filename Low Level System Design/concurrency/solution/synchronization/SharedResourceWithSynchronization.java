@@ -1,16 +1,18 @@
-package concurrency;
+package concurrency.solution.synchronization;
 
-public class SharedResource {
+public class SharedResourceWithSynchronization {
     int count = 0;
 
-    void increment() {
-        for (int i = 0; i < 10000; i++) {
+    synchronized void increment() {
+        for (int i = 0; i < 1000000; i++) {
             count++;
+//            System.out.println(Thread.currentThread().getName());
         }
     }
 
     public static void main(String[] args) {
-        SharedResource sharedResource = new SharedResource();
+        long startTimestamp = System.currentTimeMillis();
+        SharedResourceWithSynchronization sharedResource = new SharedResourceWithSynchronization();
         Runnable sharedRunnable = sharedResource::increment;
         Thread thread1 = new Thread(sharedRunnable, "Thread-1");
         Thread thread2 = new Thread(sharedRunnable, "Thread-2");
@@ -31,6 +33,7 @@ public class SharedResource {
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println(sharedResource.count);
+        long endTimestamp = System.currentTimeMillis();
+        System.out.println(sharedResource.count + " " + ((endTimestamp - startTimestamp) / 1000d));
     }
 }

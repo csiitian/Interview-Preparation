@@ -1,6 +1,5 @@
-package concurrency;
+package concurrency.solution.lock;
 
-import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

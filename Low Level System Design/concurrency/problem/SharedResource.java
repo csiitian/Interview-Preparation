@@ -1,31 +1,16 @@
-package concurrency;
+package concurrency.problem;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
-public class SharedResourceWithLock {
+public class SharedResource {
     int count = 0;
-    private Lock lock;
-
-    SharedResourceWithLock() {
-        lock = new ReentrantLock();
-    }
 
     void increment() {
-        try {
-            lock.lock();
-            for (int i = 0; i < 1000000; i++) {
-                count++;
-//                System.out.println(Thread.currentThread().getName());
-            }
-        } finally{
-            lock.unlock();
+        for (int i = 0; i < 10000; i++) {
+            count++;
         }
     }
 
     public static void main(String[] args) {
-        long startTimestamp = System.currentTimeMillis();
-        SharedResourceWithLock sharedResource = new SharedResourceWithLock();
+        SharedResource sharedResource = new SharedResource();
         Runnable sharedRunnable = sharedResource::increment;
         Thread thread1 = new Thread(sharedRunnable, "Thread-1");
         Thread thread2 = new Thread(sharedRunnable, "Thread-2");
@@ -46,7 +31,6 @@ public class SharedResourceWithLock {
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
         }
-        long endTimestamp = System.currentTimeMillis();
-        System.out.println(sharedResource.count + " " + ((endTimestamp - startTimestamp) / 1000d));
+        System.out.println(sharedResource.count);
     }
 }
