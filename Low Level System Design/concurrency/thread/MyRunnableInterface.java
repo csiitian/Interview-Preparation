@@ -1,4 +1,4 @@
-package concurrency;
+package concurrency.thread;
 
 public class MyRunnableInterface implements Runnable {
     @Override

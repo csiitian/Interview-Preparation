@@ -1,4 +1,4 @@
-package concurrency;
+package concurrency.thread;
 
 public class MyThread extends Thread {
     public void run() {

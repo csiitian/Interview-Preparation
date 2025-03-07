@@ -1,6 +1,6 @@
-package design_patterns.SolidPrinciples.LiskovSubstitutePrinciple.Solution;
+package solid_principles.LiskovSubstitutePrinciple.Problem;
 
-public class Bike implements EngineVehicle {
+public class Bike implements Vehicle {
 
   @Override
   public boolean hasEngine() {

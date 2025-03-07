@@ -1,4 +1,4 @@
-package design_patterns.SolidPrinciples.LiskovSubstitutePrinciple.Solution;
+package solid_principles.LiskovSubstitutePrinciple.Solution;
 
 public class Bicycle implements Vehicle {
   @Override

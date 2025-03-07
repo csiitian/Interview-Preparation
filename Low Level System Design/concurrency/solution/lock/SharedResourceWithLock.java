@@ -1,18 +1,31 @@
-package concurrency;
+package concurrency.solution.lock;
 
-public class SharedResourceWithSynchronization {
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class SharedResourceWithLock {
     int count = 0;
+    private Lock lock;
 
-    synchronized void increment() {
-        for (int i = 0; i < 1000000; i++) {
-            count++;
-//            System.out.println(Thread.currentThread().getName());
+    SharedResourceWithLock() {
+        lock = new ReentrantLock();
+    }
+
+    void increment() {
+        try {
+            lock.lock();
+            for (int i = 0; i < 1000000; i++) {
+                count++;
+//                System.out.println(Thread.currentThread().getName());
+            }
+        } finally{
+            lock.unlock();
         }
     }
 
     public static void main(String[] args) {
         long startTimestamp = System.currentTimeMillis();
-        SharedResourceWithSynchronization sharedResource = new SharedResourceWithSynchronization();
+        SharedResourceWithLock sharedResource = new SharedResourceWithLock();
         Runnable sharedRunnable = sharedResource::increment;
         Thread thread1 = new Thread(sharedRunnable, "Thread-1");
         Thread thread2 = new Thread(sharedRunnable, "Thread-2");
