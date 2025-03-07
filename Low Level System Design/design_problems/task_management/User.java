@@ -10,7 +10,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "domain.User{" +
                 "userId='" + userId + '\'' +
                 ", name='" + name + '\'' +
                 '}';

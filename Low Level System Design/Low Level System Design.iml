@@ -5,8 +5,11 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/Design Patterns" isTestSource="false" packagePrefix="design_patterns" />
       <sourceFolder url="file://$MODULE_DIR$/Design Problems" isTestSource="false" packagePrefix="system_design" />
-      <sourceFolder url="file://$MODULE_DIR$/java_23" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Concurrency" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/for-her" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/for-her/social_media_notification_system" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

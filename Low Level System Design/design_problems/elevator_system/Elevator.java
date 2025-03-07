@@ -5,19 +5,27 @@ import java.util.List;
 import java.util.Set;
 
 public class Elevator {
-  List<Floor> floors;
-  public Set<Integer> selectedFloors;
-  Set<Integer> restrictedFloors;
-  Direction direction;
-  DoorStatus doorStatus;
-  int currentFloor;
+    int id;
+    public Set<Integer> internalSelectedFloors;
+    public Set<Integer> externalSelectedFloors;
+    List<Floor> floors;
+    Set<Integer> restrictedFloors;
+    Direction direction;
+    DoorStatus doorStatus;
+    int currentFloor;
 
-  Elevator(List<Floor> floorList) {
-    floors = floorList;
-    selectedFloors = new HashSet<>();
-    restrictedFloors = new HashSet<>();
-    direction = Direction.IDLE;
-    doorStatus = DoorStatus.CLOSED;
-    currentFloor = 0;
-  }
+    Elevator(int id, List<Floor> floorList) {
+        this.id = id;
+        floors = floorList;
+        internalSelectedFloors = new HashSet<>();
+        externalSelectedFloors = new HashSet<>();
+        restrictedFloors = new HashSet<>();
+        direction = Direction.IDLE;
+        doorStatus = DoorStatus.CLOSED;
+        currentFloor = 0;
+    }
+
+    public int getId() {
+        return id;
+    }
 }

@@ -2,6 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/Design Problems/jira_task_planner" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/design_problems/jira_task_planner" vcs="Git" />
   </component>
 </project>

@@ -40,7 +40,7 @@ public class User {
 
   @Override
   public String toString() {
-    return "User{" +
+    return "domain.User{" +
         "userName='" + userName + '\'' +
         ", email='" + email + '\'' +
         ", phone='" + phone + '\'' +

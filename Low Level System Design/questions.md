@@ -12,11 +12,11 @@
     - It should be extensible (I should be able to add any number of states or transitions at any time)
     - I should be able to set notifications on or off for any state or for the whole state machine
 - Design a system like Jira. It should have the following functionalities :
-    - User should be able to create Task of type Story, Feature, Bugs. Each can have their own status.
+    - domain.User should be able to create Task of type Story, Feature, Bugs. Each can have their own status.
     - Stories can further have subtracts.
     - Should be able to change the status of any task.
-    - User should be able to create any sprint. Should be able to add any task to sprint and remove from it.
-        - User should be able to print
+    - domain.User should be able to create any sprint. Should be able to add any task to sprint and remove from it.
+        - domain.User should be able to print
         - Delayed task
         - Sprint details
         - Tasks assigned to the user
@@ -57,7 +57,7 @@
 - Design LinkedIn.
 - Design a video upload system for a user with low network bandwidth
 
-  User has to upload video which is more than 1GB. Users network bandwidth is too low. Network get dropped after 50% upload. User tries again and same thing happens. Now to design an optimized efficient solution to address this issue.
+  domain.User has to upload video which is more than 1GB. Users network bandwidth is too low. Network get dropped after 50% upload. domain.User tries again and same thing happens. Now to design an optimized efficient solution to address this issue.
 - Design Learning Management System
 -  Design Survey similar to Google Forms / SurveyMonkey.
 - Design Logging Framework
@@ -88,7 +88,7 @@
 - Design a home automation sytem to remotely control all the switches, devices in a home.
 - Design Maps Navigator Client for different transportation types
     - Design a maps path-building navigator client.
-    - User should be able to build path from point A to point B using your code.
+    - domain.User should be able to build path from point A to point B using your code.
     - design should support different transportation methods for example: walk, car, bus, bike.
 - Design Meeting Scheduler
     - Here there are n given meeting rooms. Book a meeting in any meeting room at given interval(starting time, end time). Also send notifications to all person who are invited for meeting.
@@ -97,10 +97,10 @@
     - Is meeting room available? etc
 - Design and Implement a logger library that applications can use to log messages.
 - Design a configuration management system
-    - User should be able to add configuration
-    - User should be able to delete configuration
-    - User should be able to search for configuration
-    - User should be able to subscribe to Configuration So that any updates in configuration will gets notfied to user
+    - domain.User should be able to add configuration
+    - domain.User should be able to delete configuration
+    - domain.User should be able to search for configuration
+    - domain.User should be able to subscribe to Configuration So that any updates in configuration will gets notfied to user
 - Design Amazon comments filtering system
 - Design a Vending Machine
     - Add items to the vending machine in fixed number of slots
@@ -120,7 +120,7 @@
     - There can be dependency relationship among suscribers i.e if there are two suscribers say A and B and A knows that B has to listen and process first, then only A can listen and process. There was many to many dependency relationship among suscribers.
     - There must a retry mechanism for handling error cases when some exception occurs in listening/ processing messages, that must be retried.
 - Design Employee Management Platform which includes payroll,IT,employee benefits and all other employee operations in one place.
-- Design User Engagment platform.
+- Design domain.User Engagment platform.
 - Design product experience platform like pendo.
 - Design Chess Game.
 - Design Live Auction platform for IPL / EPL.
@@ -243,7 +243,7 @@
 - Design a Jackpot Machine.
 - Designing a ID card system which employees use to access any zone/premises.
 - Design a Bar Graph Library.
-- Notification Service design.
+- domain.Notification Service design.
     - Design a notification service for swiggy which takes in a list of users and message and notifies them . Users could be of different types like         delivery men , swiggy employees, end user of App.
 - Gym Managment System.
     - Design a backend system for a new enterprise application that Flipkart is launching, FlipFit.
@@ -252,8 +252,8 @@
           Each center has 6 slots. 3 in the morning of an hour each from 6am to 9am and similarly 3 in the evening from 6pm to 9pm. The centers are open.         7 days a week.
         - Each slot at a center can have only 2 possible workout variations for now - Weights and Cardio.
         - The number of people that can attend each workout at each slot for a given station is fixed. Assume default slot capacity as 3(for every               workout type across centers).
-        - Same User cannot book at the same center at the same slot and the same workout type twice.
-        - User can perform the following operations:
+        - Same domain.User cannot book at the same center at the same slot and the same workout type twice.
+        - domain.User can perform the following operations:
         - Register onto the platform
         - View the workouts for a particular day
         - Book a workout for a user if seats are available in that time slot at that center
@@ -267,7 +267,7 @@
 -  Design a key value store and an Index.
 -  Design an analytics to display machines which have valid certificates,Design the system with valid dashboard with all the machines with good/bad        certificates.
 -  Design a service that calls any passed endpoint at a fixed interval.
--  Design System where User can create alerts on StockOptions.
+-  Design System where domain.User can create alerts on StockOptions.
     - Raise an Alert When "APPL" stock transaction happens for more than $100.
     - Raise an Alert When "GOOGL" stock transaction happens for less than $40.
     - ou have one black-box Api say market-api
