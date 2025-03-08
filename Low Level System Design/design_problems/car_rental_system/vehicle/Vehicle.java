@@ -64,4 +64,8 @@ public class Vehicle {
   public void setStatus(VehicleStatus status) {
     this.status = status;
   }
+
+  public synchronized boolean isAvailable() {
+    return status == VehicleStatus.AVAILABLE;
+  }
 }

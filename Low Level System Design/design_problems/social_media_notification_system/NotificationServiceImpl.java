@@ -61,7 +61,7 @@ public class NotificationServiceImpl implements INotificationsService {
         User user = users.get(userId);
         if (user == null) return;
         for (Notification notificationItr: user.getNotificationList()) {
-            if (notificationItr.getNotificationId() == notification.getNotificationId()) {
+            if (notificationItr.getId() == notification.getId()) {
                 notification.setStatus(Status.READ);
                 return;
             }

@@ -49,9 +49,10 @@ public class CarRentalService {
 
   public Reservation makeReservation(User user, Vehicle vehicle, Long pickupTime, Long dropTime, Location pickupLocation, Location dropLocation)
       throws VehicleNotAvailableException {
-    if (vehicle.getStatus() == VehicleStatus.AVAILABLE) {
+    if (vehicle.isAvailable()) {
       Reservation reservation = new Reservation(new Random().nextLong(), vehicle.getVehicleId(), user.getUserId(), pickupTime, dropTime, pickupLocation, dropLocation, ReservationStatus.PENDING);
       reservations.add(reservation);
+      vehicle.setStatus(VehicleStatus.RESERVED);
       return reservation;
     } else {
       throw new VehicleNotAvailableException("Vehicle is not available for reservation");

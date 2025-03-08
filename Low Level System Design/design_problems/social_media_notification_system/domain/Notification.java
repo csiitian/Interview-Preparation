@@ -4,22 +4,22 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Notification {
-    private String notificationId;
+    private final String id;
     private String message;
     private Type type;
     private LocalDateTime timestamp;
     private Status status;
 
     public Notification(String message, Type type) {
-        this.notificationId = UUID.randomUUID().toString();
+        this.id = UUID.randomUUID().toString();
         this.message = message;
         this.type = type;
         this.timestamp = LocalDateTime.now();
         this.status = Status.UNREAD;
     }
 
-    public String getNotificationId() {
-        return notificationId;
+    public String getId() {
+        return id;
     }
 
     public String getMessage() {

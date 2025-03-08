@@ -50,17 +50,17 @@
 
   expected the textpad to be in memory(not as file) and also expected to handle error gracefully and the program to be
   menu driven.
-- Design Car Rental System like Zoom car.
+- [Done] Design Car Rental System like Zoom car.
 - Design a billing and auctioning system similar to EBay.
   Ebay is a multinational e-commerce corporation, facilitating online consumer-to-consumer and business-to-consumer
   sales. The website is free to use for buyers, but sellers are charged fees for listing items and again when those
-  items are sold. The sellers aution their items and buyers bid on items.
-- Design Q&A application as in Amazon, Walmart has it for each product.
-- Design push notification :
+  items are sold. The sellers auction their items and buyers bid on items.
+- [-] Design Q&A application as in Amazon, Walmart has it for each product.
+- [-] Design push notification :
     - Which sends the notification to the registered users
     - Which receives an event from promotions team
     - Sends notification to iOS, android or sends an email or all three
-- Design a suggestion system
+- [Done] Design a suggestion system
 - Design and Implement a Simple Java GC (Java 7+)
     - A heap which represents JVM when a Java program starts.
     - At least three parts in the heap that represent Eden Space, Tenured Space and Perm Space.
