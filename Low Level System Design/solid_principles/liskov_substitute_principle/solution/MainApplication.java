@@ -1,4 +1,4 @@
-package solid_principles.LiskovSubstitutePrinciple.Solution;
+package solid_principles.liskov_substitute_principle.solution;
 
 import java.util.ArrayList;
 import java.util.List;

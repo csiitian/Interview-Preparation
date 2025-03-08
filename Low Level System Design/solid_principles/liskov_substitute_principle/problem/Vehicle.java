@@ -1,4 +1,4 @@
-package solid_principles.LiskovSubstitutePrinciple.Problem;
+package solid_principles.liskov_substitute_principle.problem;
 
 public interface Vehicle {
 

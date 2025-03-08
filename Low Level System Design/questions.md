@@ -16,11 +16,11 @@
 - Design a task planner. Different types of tasks are present – bug, feature and story. And their 
   attributes are
   given. also a Sprint which is a collection of tasks.
-- [ Done ] Implement a finite state machine.
+- [Done] Implement a finite state machine.
   – The machine should have one start state and can have multiple end states.
     - It should be extensible (I should be able to add any number of states or transitions at any time)
     - I should be able to set notifications on or off for any state or for the whole state machine
-- Design a system like Jira. It should have the following functionalities :
+- [Done] Design a system like Jira. It should have the following functionalities :
     - domain.User should be able to create Task of type Story, Feature, Bugs. Each can have their own status.
     - Stories can further have subtasks.
     - Should be able to change the status of any task.
@@ -36,9 +36,8 @@
     - type(BUY/SELL)
     - quantity
     - price
-
   You need to output list of stocks in the following format sell_id, buy_id, quantity, price which will get executed.
-- code a TextPad with following functionality:
+- [Done] code a TextPad with following functionality:
     - display() – to display the entire content
     - display(n, m) – to display from line n to m
     - insert(n, text) – to insert text at line n
