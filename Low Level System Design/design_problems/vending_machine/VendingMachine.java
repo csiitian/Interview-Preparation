@@ -1,9 +1,6 @@
 package design_problems.vending_machine;
 
-import design_problems.vending_machine.state.DispenseItemState;
-import design_problems.vending_machine.state.IdleState;
-import design_problems.vending_machine.state.InsertCoinState;
-import design_problems.vending_machine.state.ReturnChangeState;
+import design_problems.vending_machine.state.*;
 
 import java.util.List;
 
@@ -69,6 +66,10 @@ public class VendingMachine {
         this.selectedProduct = selectedProduct;
     }
 
+    public void setCollectedCoins(int collectedCoins) {
+        this.collectedCoins = collectedCoins;
+    }
+
     public void addCollectedCoins(int collectedCoins) {
         this.collectedCoins += collectedCoins;
     }
@@ -88,15 +89,31 @@ public class VendingMachine {
     }
 
     public void selectProduct(Product product) {
-        vendingMachineState.selectProduct(product);
+        try {
+            vendingMachineState.selectProduct(product);
+        } catch (Exception e) {
+            System.out.println("Error while selecting product: " + e.getMessage());
+        }
     }
 
     public void insertCoin(int amount) {
-        vendingMachineState.insertCoin(amount);
+        try {
+            vendingMachineState.insertCoin(amount);
+        } catch (Exception e) {
+            System.out.println("Error while inserting coin: " + e.getMessage());
+        }
     }
 
     public void dispenseItem() {
-        vendingMachineState.dispenseItem();
-        vendingMachineState.returnMoney();
+        try {
+            vendingMachineState.dispenseItem();
+        } catch (Exception e) {
+            System.out.println("Error while dispensing item: " + e.getMessage());
+        }
+        try {
+            vendingMachineState.returnMoney();
+        } catch (Exception e) {
+            System.out.println("Error while returning money: " + e.getMessage());
+        }
     }
 }

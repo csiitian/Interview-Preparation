@@ -1,7 +1,9 @@
-import domain.Notification;
-import domain.Status;
-import domain.User;
-import strategy.NotificationListStrategy;
+package design_problems.social_media_notification_system;
+
+import design_problems.social_media_notification_system.domain.Notification;
+import design_problems.social_media_notification_system.domain.Status;
+import design_problems.social_media_notification_system.domain.User;
+import design_problems.social_media_notification_system.strategy.NotificationListStrategy;
 
 import java.util.HashMap;
 import java.util.List;

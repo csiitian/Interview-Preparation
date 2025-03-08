@@ -10,8 +10,17 @@ public class MainApplication {
         vendingMachine.insertCoin(30);
         vendingMachine.dispenseItem();
 
+        System.out.println("------------------------------");
+
         vendingMachine.selectProduct(Product.COKE);
         vendingMachine.insertCoin(30);
+        vendingMachine.dispenseItem();
+
+        System.out.println("------------------------------");
+
+        vendingMachine.addInventory(List.of(Product.COKE));
+        vendingMachine.selectProduct(Product.COKE);
+        vendingMachine.insertCoin(25);
         vendingMachine.dispenseItem();
     }
 }

@@ -1,6 +1,6 @@
-package strategy;
+package design_problems.social_media_notification_system.strategy;
 
-import domain.Notification;
+import design_problems.social_media_notification_system.domain.Notification;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package domain;
+package design_problems.social_media_notification_system.domain;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
