@@ -33,6 +33,6 @@ public class MainApplication {
 
     // get user transactions
     List<Transaction> userTransactions = libraryManager.getUserTransactions(user);
-    System.out.println("domain.User: " + user + " Transactions: " + userTransactions);
+    System.out.println("User: " + user + " Transactions: " + userTransactions);
   }
 }

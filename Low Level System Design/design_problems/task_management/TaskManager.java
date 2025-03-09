@@ -26,7 +26,7 @@ public class TaskManager {
     }
 
     public User createUser(String name, String email) {
-        String userId = "domain.User:" + UUID.randomUUID();
+        String userId = "User:" + UUID.randomUUID();
         User user = new User();
         user.userId = userId;
         user.name = name;
