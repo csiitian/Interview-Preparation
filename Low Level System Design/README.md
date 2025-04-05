@@ -1,159 +1,123 @@
 # Low Level System Design
 
-## 📚 Table of Contents
-- [Fundamentals](#fundamentals)
-- [Design Patterns](#design-patterns)
-- [Implementation Patterns](#implementation-patterns)
-- [Case Studies](#case-studies)
-- [Practice Problems](#practice-problems)
-- [Resources](#resources)
+## Overview
+This repository contains a comprehensive collection of low-level system design problems, design patterns, and implementation examples. It serves as a reference for software engineers preparing for technical interviews and for those looking to improve their system design skills.
 
-## 🎯 Fundamentals
-
-### Core Concepts
-- [SOLID Principles](fundamentals/solid-principles.md)
-- [Design Patterns](fundamentals/design-patterns.md)
-- [Clean Architecture](fundamentals/clean-architecture.md)
-- [Domain-Driven Design](fundamentals/ddd.md)
-- [Test-Driven Development](fundamentals/tdd.md)
-
-### Advanced Concepts
-- [Microservices Architecture](fundamentals/microservices.md)
-- [Event Sourcing](fundamentals/event-sourcing.md)
-- [CQRS Pattern](fundamentals/cqrs.md)
-- [Circuit Breaker Pattern](fundamentals/circuit-breaker.md)
-- [Rate Limiting](fundamentals/rate-limiting.md)
-
-## 🔄 Design Patterns
-
-### Creational Patterns
-- [Singleton](patterns/creational/singleton.md)
-- [Factory Method](patterns/creational/factory-method.md)
-- [Abstract Factory](patterns/creational/abstract-factory.md)
-- [Builder](patterns/creational/builder.md)
-- [Prototype](patterns/creational/prototype.md)
-
-### Structural Patterns
-- [Adapter](patterns/structural/adapter.md)
-- [Bridge](patterns/structural/bridge.md)
-- [Composite](patterns/structural/composite.md)
-- [Decorator](patterns/structural/decorator.md)
-- [Facade](patterns/structural/facade.md)
-- [Flyweight](patterns/structural/flyweight.md)
-- [Proxy](patterns/structural/proxy.md)
-
-### Behavioral Patterns
-- [Chain of Responsibility](patterns/behavioral/chain-of-responsibility.md)
-- [Command](patterns/behavioral/command.md)
-- [Iterator](patterns/behavioral/iterator.md)
-- [Mediator](patterns/behavioral/mediator.md)
-- [Memento](patterns/behavioral/memento.md)
-- [Observer](patterns/behavioral/observer.md)
-- [State](patterns/behavioral/state.md)
-- [Strategy](patterns/behavioral/strategy.md)
-- [Template Method](patterns/behavioral/template-method.md)
-- [Visitor](patterns/behavioral/visitor.md)
-
-## 💻 Implementation Patterns
-
-### Code Organization
-- [Package Structure](implementation/package-structure.md)
-- [Module Design](implementation/module-design.md)
-- [Dependency Injection](implementation/dependency-injection.md)
-- [Service Layer](implementation/service-layer.md)
-- [Repository Pattern](implementation/repository-pattern.md)
-
-### Best Practices
-- [Error Handling](implementation/error-handling.md)
-- [Logging](implementation/logging.md)
-- [Configuration Management](implementation/configuration.md)
-- [Security](implementation/security.md)
-- [Performance Optimization](implementation/performance.md)
-
-## 📝 Case Studies
+## Table of Contents
 
 ### Design Patterns
-- [Payment Gateway](case-studies/payment-gateway.md)
-- [E-commerce System](case-studies/ecommerce.md)
-- [Hotel Booking System](case-studies/hotel-booking.md)
-- [File System](case-studies/file-system.md)
-- [Cache System](case-studies/cache-system.md)
+- [Creational Patterns](patterns/creational/)
+- [Structural Patterns](patterns/structural/)
+- [Behavioral Patterns](patterns/behavioral/)
 
-### Components
-- [Authentication System](case-studies/auth-system.md)
-- [Notification System](case-studies/notification-system.md)
-- [Search System](case-studies/search-system.md)
-- [Order Processing System](case-studies/order-processing.md)
+### Design Problems
+- [Library Management System](design_problems/library_management/)
+- [Vending Machine](design_problems/vending_machine/)
+- [ATM System](design_problems/atm/)
+- [Parking Lot](design_problems/parking_lot/)
+- [Chess Game](design_problems/chess/)
+- [Snake and Ladder](design_problems/snake_and_ladder/)
+- [Tic Tac Toe](design_problems/tic_tac_toe/)
+- [Hotel Management](design_problems/hotel_management/)
+- [Movie Ticket Booking](design_problems/movie_ticket_booking_system/)
+- [Restaurant Management](design_problems/restaurant_management/)
+- [Car Rental System](design_problems/car_rental_system/)
+- [Elevator System](design_problems/elevator_system/)
+- [Splitwise](design_problems/split_wise/)
+- [Social Networking Service](design_problems/social_networking_service/)
+- [Ride Sharing Service](design_problems/ride_sharing_service/)
+- [Stack Overflow](design_problems/stack_overflow/)
+- [LinkedIn](design_problems/linked_in/)
+- [Jira Clone](design_problems/jira_clone/)
+- [Text Pad](design_problems/text_pad/)
+- [True Caller](design_problems/true_caller/)
+- [Subscription Based Sports News](design_problems/subscription_based_sports_news/)
+- [Push Notification System](design_problems/push_notification_system/)
+- [Social Media Notification System](design_problems/social_media_notification_system/)
+- [Recommendation System](design_problems/recommendation_system/)
+- [Task Management](design_problems/task_management/)
+- [Runway Allocation](design_problems/runway_allocation/)
+- [Logger Framework](design_problems/logger_framework/)
+- [Web Crawler](design_problems/web_crawler/)
+- [Rate Limiter](design_problems/rate_limiter/)
+- [In Memory Cache](design_problems/in_memory_cache/)
+- [UUID Generator](design_problems/uuid_generator/)
+- [Stock Exchange System](design_problems/stock_exchange_system/)
+- [Scheduler](design_problems/sheduler/)
+- [Flip Fit](design_problems/flip_fit/)
+- [Jackpot Machine](design_problems/jackpot_machine/)
+- [Music Recommender](design_problems/music_recommender/)
+- [Design SQL](design_problems/design_sql/)
 
-## 💡 Practice Problems
+### SOLID Principles
+- [Single Responsibility Principle](solid_principles/)
+- [Open/Closed Principle](solid_principles/)
+- [Liskov Substitution Principle](solid_principles/)
+- [Interface Segregation Principle](solid_principles/)
+- [Dependency Inversion Principle](solid_principles/)
 
-### Basic Problems
-- [Design a Parking Lot](problems/basic/parking-lot.md)
-- [Design a Library System](problems/basic/library-system.md)
-- [Design a Vending Machine](problems/basic/vending-machine.md)
-- [Design a Chess Game](problems/basic/chess-game.md)
-- [Design a Deck of Cards](problems/basic/deck-of-cards.md)
+### Concurrency
+- [Thread Management](concurrency/)
+- [Synchronization](concurrency/)
+- [Deadlock Prevention](concurrency/)
+- [Thread Pool](concurrency/)
 
-### Advanced Problems
-- [Design a Distributed Cache](problems/advanced/distributed-cache.md)
-- [Design a Rate Limiter](problems/advanced/rate-limiter.md)
-- [Design a Job Scheduler](problems/advanced/job-scheduler.md)
-- [Design a File System](problems/advanced/file-system.md)
-- [Design a Database](problems/advanced/database.md)
+## Getting Started
 
-## 📚 Resources
+### Prerequisites
+- Java 8 or higher
+- Maven or Gradle (for building projects)
+- Basic understanding of object-oriented programming
+- Familiarity with design patterns
 
-### Books
-- [Clean Code](resources/books.md#clean-code)
-- [Design Patterns](resources/books.md#design-patterns)
-- [Domain-Driven Design](resources/books.md#domain-driven-design)
-- [Refactoring](resources/books.md#refactoring)
+### Installation
+1. Clone the repository
+   ```
+   git clone https://github.com/yourusername/low-level-system-design.git
+   ```
+2. Navigate to the project directory
+   ```
+   cd low-level-system-design
+   ```
+3. Build the project (if applicable)
+   ```
+   mvn clean install
+   ```
 
-### Online Courses
-- [Advanced System Design](resources/courses.md#advanced-system-design)
-- [Clean Architecture](resources/courses.md#clean-architecture)
-- [Design Patterns](resources/courses.md#design-patterns)
+## Study Path
 
-### Practice Platforms
-- [System Design Primer](resources/platforms.md#system-design-primer)
-- [Educative.io](resources/platforms.md#educativeio)
+### 1. Design Patterns
+Start with understanding the fundamental design patterns:
+1. Study the [Creational Patterns](patterns/creational/)
+2. Move on to [Structural Patterns](patterns/structural/)
+3. Finally, explore [Behavioral Patterns](patterns/behavioral/)
 
-## 🎯 Study Path
+### 2. SOLID Principles
+Understand the SOLID principles to write better code:
+1. Study each principle in the [SOLID Principles](solid_principles/) directory
+2. Implement examples for each principle
+3. Identify violations in existing code
 
-### Week 1-2: Basics
-1. SOLID Principles
-2. Basic Design Patterns
-3. Clean Architecture
-4. Code Organization
+### 3. Design Problems
+Practice solving design problems:
+1. Start with simpler problems like [Parking Lot](design_problems/parking_lot/) or [Tic Tac Toe](design_problems/tic_tac_toe/)
+2. Move to medium complexity problems like [Library Management](design_problems/library_management/) or [Vending Machine](design_problems/vending_machine/)
+3. Finally, tackle complex problems like [Stock Exchange System](design_problems/stock_exchange_system/) or [Social Networking Service](design_problems/social_networking_service/)
 
-### Week 3-4: Intermediate
-1. Advanced Design Patterns
-2. Implementation Patterns
-3. Best Practices
-4. Case Studies
+### 4. Concurrency
+Learn about concurrent programming:
+1. Study [Thread Management](concurrency/)
+2. Understand [Synchronization](concurrency/)
+3. Learn about [Deadlock Prevention](concurrency/)
+4. Explore [Thread Pool](concurrency/) implementation
 
-### Week 5-6: Advanced
-1. Microservices
-2. Event Sourcing
-3. CQRS
-4. Complex Systems
+## Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📊 Progress Tracking
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-### Daily Goals
-- Study 1 design pattern
-- Review 1 case study
-- Practice 1 problem
-- Write clean code
-
-### Weekly Goals
-- Complete 1 topic
-- Design 2 systems
-- Review weak areas
-- Code review
-
-### Monthly Goals
-- Master 2-3 patterns
-- Complete 1 complexity level
-- Take mock interviews
-- Build a project
+## Acknowledgments
+- Design Patterns: Elements of Reusable Object-Oriented Software by Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides
+- Clean Code by Robert C. Martin
+- Effective Java by Joshua Bloch
