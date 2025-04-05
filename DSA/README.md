@@ -1,96 +1,123 @@
-### Have you ever wondered where can you find all the resources for mastering DSA ?
+# Data Structures and Algorithms
 
-Yes, and your senior said only one sentence: "GFG and Leetcode are enough !"
+## 📚 Table of Contents
+- [Fundamentals](#fundamentals)
+- [Problem Patterns](#problem-patterns)
+- [Implementation](#implementation)
+- [Practice Problems](#practice-problems)
+- [Resources](#resources)
 
-That's correct, there is no need for wondering here and there. I am providing all the resources
-obviously you should be good at reading and writing. I don't care if you write in your laptop or on paper.
+## 🎯 Fundamentals
 
-If you find any topic difficult then go to your favorite youtuber, I will mention some of them ( I am not in that category )
+### Data Structures
+- [Arrays and Strings](fundamentals/arrays-strings.md)
+- [Linked Lists](fundamentals/linked-lists.md)
+- [Stacks and Queues](fundamentals/stacks-queues.md)
+- [Trees and Graphs](fundamentals/trees-graphs.md)
+- [Hash Tables](fundamentals/hash-tables.md)
+- [Heaps](fundamentals/heaps.md)
 
-1. [Array](https://www.geeksforgeeks.org/array-data-structure-guide/?ref=quiz_lbp)
-2. [Matrix](https://www.geeksforgeeks.org/matrix/)
-3. [LinkedList](https://www.geeksforgeeks.org/linked-list-data-structure/?ref=shm)
-4. [Stack](https://www.geeksforgeeks.org/stack-data-structure/)
-5. [Queue](https://www.geeksforgeeks.org/queue-data-structure/)
-6. [Binary Tree](https://www.geeksforgeeks.org/binary-tree-data-structure/)
-7. [Binary Search Tree](https://www.geeksforgeeks.org/binary-search-tree-data-structure/)
-8. [Heap](https://www.geeksforgeeks.org/heap-data-structure/)
-9. [Hashing](https://www.geeksforgeeks.org/hashing-data-structure/)
-10. [Segment Tree](https://www.geeksforgeeks.org/tag/segment-tree/)
-11. [Trie](https://www.geeksforgeeks.org/tag/trie/)
-12. [Binary Indexed Tree](https://www.geeksforgeeks.org/tag/binary-indexed-tree/)
-13. [Suffix Tree](https://www.geeksforgeeks.org/tag/suffix-tree/)
-14. AVL Tree
-    1. [Insertion](https://www.geeksforgeeks.org/insertion-in-an-avl-tree/)
-    2. [Deletion](https://www.geeksforgeeks.org/deletion-in-an-avl-tree/)
-    3. [Duplicate Keys](https://www.geeksforgeeks.org/avl-with-duplicate-keys/)
+### Algorithms
+- [Sorting](algorithms/sorting.md)
+- [Searching](algorithms/searching.md)
+- [Dynamic Programming](algorithms/dynamic-programming.md)
+- [Greedy Algorithms](algorithms/greedy.md)
+- [Backtracking](algorithms/backtracking.md)
+- [Bit Manipulation](algorithms/bit-manipulation.md)
 
-15. [Searching Algorithms](https://www.geeksforgeeks.org/searching-algorithms/)
-16. [Sorting Algorithms](https://www.geeksforgeeks.org/sorting-algorithms/)
-17. [Greedy Algorithms](https://www.geeksforgeeks.org/greedy-algorithms/)
-18. [Recursion](https://www.geeksforgeeks.org/introduction-to-recursion-data-structure-and-algorithm-tutorials/?ref=shm)
-19. [Dynamic Programming](https://www.geeksforgeeks.org/dynamic-programming/)
-20. [Backtracking Algorithms](https://www.geeksforgeeks.org/backtracking-algorithms/)
-21. [Divide and Conquer](https://www.geeksforgeeks.org/divide-and-conquer/)
-22. [Geometrics Algorithms](https://www.geeksforgeeks.org/geometric-algorithms/)
-23. [Mathematical Algorithms](https://www.geeksforgeeks.org/mathematical-algorithms/)
-24. [Bitwise Algorithms](https://geeksforgeeks.org/bitwise-algorithms/)
-25. [Graph](https://www.geeksforgeeks.org/graph-data-structure-and-algorithms/)
-26. [Pattern Searching](https://www.geeksforgeeks.org/algorithms-gq/pattern-searching/)
-27. [Number Theory](https://www.geeksforgeeks.org/number-theory-interesting-facts-and-algorithms/)
+## 🔄 Problem Patterns
 
-Other Resources:
+### Common Patterns
+- [Two Pointers](patterns/two-pointers.md)
+- [Sliding Window](patterns/sliding-window.md)
+- [Binary Search](patterns/binary-search.md)
+- [DFS and BFS](patterns/dfs-bfs.md)
+- [Topological Sort](patterns/topological-sort.md)
+- [Union Find](patterns/union-find.md)
 
-[Top 100 Topic Wise dsa Interview Questions](https://www.geeksforgeeks.org/top-100-data-structure-and-algorithms-dsa-interview-questions-topic-wise/?ref=ghm)
+### Advanced Patterns
+- [Monotonic Stack/Queue](patterns/monotonic.md)
+- [Trie](patterns/trie.md)
+- [Segment Tree](patterns/segment-tree.md)
+- [Binary Indexed Tree](patterns/binary-indexed-tree.md)
 
-[Must do coding Questions](https://www.geeksforgeeks.org/must-do-coding-questions-for-companies-like-amazon-microsoft-adobe/)
+## 💻 Implementation
 
-[Company Wise Must Coding Questions](https://www.geeksforgeeks.org/must-coding-questions-company-wise/)
+### Java Implementation
+- [Basic Data Structures](implementation/basic-ds.java)
+- [Advanced Data Structures](implementation/advanced-ds.java)
+- [Algorithm Templates](implementation/algorithm-templates.java)
 
-[Practice for any coding Interview](https://www.geeksforgeeks.org/practice-for-cracking-any-coding-interview/)
+### Templates
+- [Binary Search Template](templates/binary-search.java)
+- [DFS Template](templates/dfs.java)
+- [BFS Template](templates/bfs.java)
+- [DP Template](templates/dp.java)
 
-If you read all of them and understand it, also please make sure to make notes for revision. That's the most important part.
+## 📝 Practice Problems
 
-```
-I just read somewhere on leetcode where a Great Programmer 
-( I think he was holding Guardian Badge on leetcode ) 
-said that I run my program in my mind.
+### Easy Problems
+- [Array Problems](problems/easy/arrays.md)
+- [String Problems](problems/easy/strings.md)
+- [Basic Math](problems/easy/math.md)
 
-I mean really ? yes, that's possible 
-I also believe in `Power of Imagination`.
+### Medium Problems
+- [Tree Problems](problems/medium/trees.md)
+- [Graph Problems](problems/medium/graphs.md)
+- [DP Problems](problems/medium/dp.md)
 
-So If you want to become more than average programmer 
-just practice more and more. 
-But if you really want to be Great Programmer 
-then use `Power Of Imagination`, 
-try to find patterns and write code in your mind and run code in your mind.
-```
+### Hard Problems
+- [Advanced DP](problems/hard/dp.md)
+- [Complex Graph Problems](problems/hard/graphs.md)
+- [System Design Problems](problems/hard/system-design.md)
 
-I think that's all guys !!!
+## 📚 Resources
 
-I hope you become a Great Programmer one day !
+### Books
+- [Introduction to Algorithms](resources/books.md#introduction-to-algorithms)
+- [Cracking the Coding Interview](resources/books.md#cracking-the-coding-interview)
 
-And also along with your learning journey, try to share your learning with others on any Platforms, Twitter, Medium or Leetcode.
-So that others can really benefit from that.
+### Online Courses
+- [Algorithms Specialization](resources/courses.md#algorithms-specialization)
+- [Data Structures and Algorithms](resources/courses.md#data-structures-and-algorithms)
 
-Now once you read the chapters, also make sure to practice questions on that topics.
-So let's pick one topic `Stack` now go to leetcode, select `Stack` tagged questions and select difficulty as easy.
-Yes, we are going to solve `Easy` questions first and now sort it based on `Acceptance Rate`.
-The more `Acceptance Rate` means the question has been solved by many peoples successfully who have tried it.
+### Practice Platforms
+- [LeetCode](resources/platforms.md#leetcode)
+- [HackerRank](resources/platforms.md#hackerrank)
 
-https://leetcode.com/problemset/?topicSlugs=stack&page=1&difficulty=EASY&sorting=W3sic29ydE9yZGVyIjoiREVTQ0VORElORyIsIm9yZGVyQnkiOiJBQ19SQVRFIn1d
+## 🎯 Study Path
 
-So after that my url looks like that. Now pick one by one question and start to solve them.
+### Week 1-2: Basics
+1. Arrays and Strings
+2. Basic Sorting
+3. Simple Search
+4. Basic Math
 
-#### What if you are not able to solve that questions ?
-Well, in that case don't worry. This will happen initially for most of the times and later also will happend but you will get habitual.
+### Week 3-4: Intermediate
+1. Linked Lists
+2. Stacks and Queues
+3. Basic Trees
+4. Hash Tables
 
-So now go the `Solutions` tab. where you can find solutions with explanations.
+### Week 5-6: Advanced
+1. Graphs
+2. Dynamic Programming
+3. Advanced Trees
+4. Complex Algorithms
 
-![img.png](../images/img.png)
+## 📊 Progress Tracking
 
-Read them and if you don't understand just comment your query, `Author` or any other people might respond. and try to see more and more solutions till you are not satisfied.
+### Daily Goals
+- Solve 2-3 problems
+- Review 1 concept
+- Practice 1 pattern
 
-And this approach you need to repeat, that's it.
+### Weekly Goals
+- Complete 1 topic
+- Solve 10 problems
+- Review weak areas
 
-And you are good for the Interview. ( Because that's the ultimate `GOAL` )
+### Monthly Goals
+- Master 2-3 patterns
+- Complete 1 difficulty level
+- Take mock interviews

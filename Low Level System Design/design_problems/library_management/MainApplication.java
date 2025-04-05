@@ -1,5 +1,7 @@
 package design_problems.library_management;
 
+import design_problems.library_management.domain.*;
+
 import java.util.List;
 
 public class MainApplication {

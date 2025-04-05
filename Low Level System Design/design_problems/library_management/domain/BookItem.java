@@ -1,4 +1,6 @@
-package design_problems.library_management;
+package design_problems.library_management.domain;
+
+import java.util.concurrent.locks.ReentrantLock;
 
 public class BookItem {
   Book book;
@@ -33,6 +35,10 @@ public class BookItem {
 
   public Book getBook() {
     return book;
+  }
+
+  public boolean isBorrowed() {
+    return isBorrowed;
   }
 
   public boolean checkout() {

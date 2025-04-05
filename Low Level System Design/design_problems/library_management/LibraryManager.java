@@ -1,5 +1,7 @@
 package design_problems.library_management;
 
+import design_problems.library_management.domain.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -52,7 +54,7 @@ public class LibraryManager {
   public void addBookItemToCart(User user, BookItem bookItem) {
     Cart cart = userCartMap.computeIfAbsent(user.getUserId(), k -> new Cart());
     // check if book is available and no same book copy is already in cart
-    if (bookItem.isBorrowed) {
+    if (bookItem.isBorrowed()) {
       System.out.println("Book with ISBN: " + bookItem.getBook().getISBN() + " is already borrowed");
       return;
     }
@@ -66,16 +68,16 @@ public class LibraryManager {
     cart.addItem(bookItem);
   }
 
-  public boolean checkout(User user) {
+  public void checkout(User user) {
     Cart cart = userCartMap.get(user.getUserId());
     if (cart == null) {
       System.out.println("No items in cart for user with id: " + user.getUserId());
-      return false;
+      return;
     }
     List<Transaction> userTransactions = new ArrayList<>();
     for (CartItem cartItem : cart.getCartItems()) {
       if (!cartItem.getBookItem().checkout()) {
-        return false;
+        return;
       }
       Transaction transaction = new Transaction("T" + System.currentTimeMillis(), user.getUserId(), cartItem.getBookItem().getBarcode(), new Date());
       userTransactions.add(transaction);
@@ -84,13 +86,12 @@ public class LibraryManager {
     cart.setStatus(CartStatus.CLOSED);
     transactions.addAll(userTransactions);
     System.out.println("Books issued successfully to user with id: " + user.getUserId() + " and transaction ids: " + userTransactions);
-    return true;
   }
 
   public void returnBooks(List<String> barCodes) {
     Set<String> barCodeSets = new HashSet<>(barCodes);
     for (Transaction transaction : transactions) {
-      if (barCodeSets.contains(transaction.getBookBarcode())) {
+      if (barCodeSets.contains(transaction.getBookBarcode()) && !transaction.isReturned()) {
         transaction.setReturned();
         System.out.println("Book returned successfully by user with id: " + transaction.getUserId() + " and transaction: " + transaction);
       }

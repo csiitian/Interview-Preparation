@@ -1,4 +1,4 @@
-package design_problems.library_management;
+package design_problems.library_management.domain;
 
 public enum UserType {
   CUSTOMER,

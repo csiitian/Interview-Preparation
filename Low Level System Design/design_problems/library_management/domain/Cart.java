@@ -1,4 +1,4 @@
-package design_problems.library_management;
+package design_problems.library_management.domain;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -6,17 +6,17 @@ import java.util.Set;
 public class Cart {
   private int cartId;
   private int userId;
-  private Set<CartItem> cartItems;
+  private final Set<CartItem> cartItems;
   private CartStatus status;
 
-  Cart() {
+  public Cart() {
     cartItems = new HashSet<>();
     status = CartStatus.OPEN;
   }
 
-  public boolean addItem(BookItem bookItem) {
+  public void addItem(BookItem bookItem) {
     CartItem cartItem = new CartItem(bookItem);
-    return cartItems.add(cartItem);
+    cartItems.add(cartItem);
   }
 
   public boolean removeItem(CartItem cartItem) {

@@ -1,7 +1,7 @@
-package design_problems.library_management;
+package design_problems.library_management.domain;
 
 public class CartItem {
-  private BookItem bookItem;
+  private final BookItem bookItem;
   private Long addedDate;
 
   public CartItem(BookItem bookItem) {

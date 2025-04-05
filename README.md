@@ -1,61 +1,109 @@
-## Leetcode Profile
-![Leetcode Solved Questions](https://leetcode-profile.vercel.app/?username=cs_iitian)
+# 🚀 Interview Preparation Repository
 
-# Interview Preparation Repository
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![LeetCode Profile](https://img.shields.io/badge/LeetCode-Profile-blue)](https://leetcode.com/cs_iitian)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/yourusername/interview-preparation/graphs/commit-activity)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](CONTRIBUTING.md)
 
-Welcome to the Interview Preparation repository! This repository is designed to help you prepare for technical interviews, specifically focusing on software engineering roles. Here, you will find a curated collection of resources, study guides, and practice materials to enhance your interview readiness.
+A comprehensive repository to help you prepare for technical interviews in software engineering. This repository contains curated resources, study guides, and practice materials to enhance your interview readiness.
 
-## Table of Contents
+## 📚 Table of Contents
 
 - [Overview](#overview)
+- [Getting Started](#getting-started)
+- [Topics Covered](#topics-covered)
+- [Study Path](#study-path)
 - [Resources](#resources)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Overview
+## 🎯 Overview
 
-This repository aims to provide comprehensive preparation materials for software engineering interviews. Whether you are preparing for your first interview or looking to refresh your skills, this repository offers valuable resources and practice problems.
+This repository is designed to be your one-stop resource for technical interview preparation. Whether you're a beginner or an experienced developer, you'll find valuable materials to help you succeed in your interviews.
 
-## Resources
+## 🚀 Getting Started
 
-### Companies and Career Portals
+1. **Fork this repository**
+2. **Clone your fork**
+   ```bash
+   git clone https://github.com/your-username/interview-preparation.git
+   ```
+3. **Start with the basics**
+   - Begin with DSA fundamentals
+   - Move to problem-solving patterns
+   - Practice with company-specific questions
 
-We have compiled a list of top companies along with their career portals to help you find opportunities and prepare for specific companies.
+## 📖 Topics Covered
 
-- [Top 100 Companies](List-of-Companies)
+### 1. Data Structures and Algorithms
+- [DSA Patterns](DSA/DSA-Patterns/)
+- [DSA Templates](DSA/DSA-Templates/)
+- [Sorting Algorithms](DSA/All%20Sorting%20Algorithms/)
+- [Java Implementation](DSA/Java_Code/)
 
-### LeetCode Interview Approach
+### 2. System Design
+- [High Level System Design](High%20Level%20System%20Design/)
+- [Low Level System Design](Low%20Level%20System%20Design/)
 
-This directory includes various approaches and strategies to tackle LeetCode problems effectively.
+### 3. Competitive Programming
+- [Problem Solving Techniques](Competitive_Programming/)
+- [Common Patterns](Competitive_Programming/)
 
-- [LeetCode Interview Approach](Interview-Approach-Solution)
+### 4. Interview Preparation
+- [Company-specific Questions](List-of-Companies/)
+- [Interview Approaches](Interview-Approach-Solution/)
 
-### DSA Patterns
+## 📈 Study Path
 
-Understanding different DSA (Data Structures and Algorithms) patterns is crucial for technical interviews. This directory includes various DSA patterns and related problems.
+1. **Week 1-2: DSA Fundamentals**
+   - Basic data structures
+   - Time and space complexity
+   - Basic algorithms
 
-- [DSA Patterns](DSA/DSA-Patterns)
+2. **Week 3-4: Problem Solving**
+   - Common patterns
+   - LeetCode easy problems
+   - Interview approaches
 
-### DSA Templates
+3. **Week 5-6: Advanced Topics**
+   - System design
+   - Low-level design
+   - Company-specific preparation
 
-- [DSA Templates](DSA/DSA-Templates)
+## 📚 Resources
 
-## Contributing
+### Books and Courses
+- [Recommended Books](resources/books.md)
+- [Online Courses](resources/courses.md)
+- [Practice Platforms](resources/platforms.md)
 
-We welcome contributions from the community to help make this repository more comprehensive and up-to-date. If you have any resources, practice problems, or insights to share, please follow these steps:
+### Company-specific Resources
+- [Top 100 Companies](List-of-Companies/)
+- [Interview Experiences](resources/interview-experiences.md)
+- [Company Question Banks](resources/company-questions.md)
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/YourFeature`).
-3. Commit your changes (`git commit -am 'Add some feature'`).
-4. Push to the branch (`git push origin feature/YourFeature`).
-5. Open a Pull Request.
+## 🤝 Contributing
 
-## License
+We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting pull requests.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## 🙏 Acknowledgments
+
+- Thanks to all contributors who have helped make this repository better
+- Special thanks to the open-source community
+- Inspired by various interview preparation resources
+
 ---
 
-Happy coding and best of luck with your interviews!
-
-If you have any questions or need further assistance, feel free to open an issue or reach out to the community.
+<div align="center">
+  <sub>Built with ❤️ by the Interview Preparation Community</sub>
+</div>

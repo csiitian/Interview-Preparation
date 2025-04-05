@@ -1,12 +1,12 @@
-package design_problems.library_management;
+package design_problems.library_management.domain;
 
 import java.util.Date;
 
 public class Transaction {
-  private String transactionId;
-  private String userId;
-  private String bookBarcode;
-  private Date issueDate;
+  private final String transactionId;
+  private final String userId;
+  private final String bookBarcode;
+  private final Date issueDate;
   private Date returnDate;
   private boolean isReturned;
 
@@ -24,6 +24,10 @@ public class Transaction {
 
   public String getUserId() {
     return userId;
+  }
+
+  public boolean isReturned() {
+    return isReturned;
   }
 
   public void setReturned() {
