@@ -1,4 +1,4 @@
-package concurrency.day_7;
+package concurrency.day_07;
 
 import java.util.LinkedList;
 import java.util.Queue;

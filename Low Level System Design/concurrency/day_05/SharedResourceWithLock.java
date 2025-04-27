@@ -1,4 +1,4 @@
-package concurrency.day_5;
+package concurrency.day_05;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

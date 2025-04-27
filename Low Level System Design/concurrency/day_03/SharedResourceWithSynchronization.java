@@ -1,4 +1,4 @@
-package concurrency.day_3;
+package concurrency.day_03;
 
 public class SharedResourceWithSynchronization {
     int count = 0;

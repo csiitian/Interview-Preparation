@@ -1,4 +1,4 @@
-package concurrency.day_6;
+package concurrency.day_06;
 
 public class DeadlockSimulation {
     Object lock1 = new Object();

@@ -1,4 +1,4 @@
-package concurrency.day_4;
+package concurrency.day_04;
 
 public class MainApplication {
     public static void main(String[] args) throws InterruptedException {

@@ -1,4 +1,4 @@
-package concurrency.day_1;
+package concurrency.day_01;
 
 public class MyThread extends Thread {
     public void run() {

@@ -1,4 +1,4 @@
-package concurrency.day_8;
+package concurrency.day_08;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;

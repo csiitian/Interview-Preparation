@@ -32,11 +32,12 @@
 10. Producer Consumer using BlockingQueue [ Done ]
    - put() blocks until space available
    - take() blocks until item available
+
 11. Semaphore [ Done ]
     - Controlled Concurrency, Only limited threads can work at same time
     - you can think of it as token, use it while working and return back once done
     - fair semaphore
-12. Countdown Latch
+12. Countdown Latch [ Done ]
     - Start 3 worker threads
     - Main thread should wait until all 3 workers finish their tasks
     - await() main thread pauses

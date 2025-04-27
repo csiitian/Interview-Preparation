@@ -1,4 +1,4 @@
-package concurrency.day_2;
+package concurrency.day_02;
 
 public class MyRunnableInterface implements Runnable {
     @Override

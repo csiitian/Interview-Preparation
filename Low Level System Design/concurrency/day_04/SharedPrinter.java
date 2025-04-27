@@ -1,4 +1,4 @@
-package concurrency.day_4;
+package concurrency.day_04;
 
 public class SharedPrinter {
     static volatile int counter = 1;

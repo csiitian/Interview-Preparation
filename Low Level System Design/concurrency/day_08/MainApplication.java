@@ -1,4 +1,4 @@
-package concurrency.day_8;
+package concurrency.day_08;
 
 public class MainApplication {
     public static void main(String[] args) {
