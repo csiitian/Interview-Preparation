@@ -1,18 +1,18 @@
 package design_problems.car_rental_system;
 
-import design_problems.car_rental_system.billing.Billing;
+import design_problems.car_rental_system.domain.Billing;
 import design_problems.car_rental_system.exception.VehicleNotAvailableException;
-import design_problems.car_rental_system.location.Location;
-import design_problems.car_rental_system.payment.Payment;
-import design_problems.car_rental_system.payment.PaymentStatus;
-import design_problems.car_rental_system.payment.PaymentType;
-import design_problems.car_rental_system.reservation.Reservation;
-import design_problems.car_rental_system.store.VehicleStore;
-import design_problems.car_rental_system.user.User;
-import design_problems.car_rental_system.user.UserType;
-import design_problems.car_rental_system.vehicle.Vehicle;
-import design_problems.car_rental_system.vehicle.VehicleStatus;
-import design_problems.car_rental_system.vehicle.VehicleType;
+import design_problems.car_rental_system.domain.Location;
+import design_problems.car_rental_system.domain.Payment;
+import design_problems.car_rental_system.domain.PaymentStatus;
+import design_problems.car_rental_system.domain.PaymentType;
+import design_problems.car_rental_system.domain.Reservation;
+import design_problems.car_rental_system.domain.VehicleStore;
+import design_problems.car_rental_system.domain.User;
+import design_problems.car_rental_system.domain.UserType;
+import design_problems.car_rental_system.domain.Vehicle;
+import design_problems.car_rental_system.domain.VehicleStatus;
+import design_problems.car_rental_system.domain.VehicleType;
 
 public class MainApplication {
 

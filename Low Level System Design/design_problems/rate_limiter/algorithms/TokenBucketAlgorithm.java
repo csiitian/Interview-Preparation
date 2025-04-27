@@ -30,7 +30,7 @@ public class TokenBucketAlgorithm extends Algorithm {
             long newTokens = elapsedTimeInSeconds * refillRate;
             lastRefillTimestamp.put(userId, now);
             AtomicLong currentToken = currentTokenMap.get(userId);
-            currentToken.addAndGet(Math.min(maxRequestCount, currentToken.get() + newTokens));
+            currentToken.addAndGet(Math.min(bucketSize, currentToken.get() + newTokens));
         }
     }
 
