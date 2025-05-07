@@ -1,7 +1,7 @@
-package design_problems.push_notification_system.channel;
+package design_problems.notification_system.channel;
 
-import design_problems.social_media_notification_system.domain.Notification;
-import design_problems.social_media_notification_system.domain.User;
+import design_problems.notification_system.domain.Notification;
+import design_problems.notification_system.domain.User;
 
 public class AndroidPushNotificationChannel implements NotificationChannel {
     @Override

@@ -32,7 +32,7 @@ This repository contains a comprehensive collection of low-level system design p
 - [Text Pad](design_problems/text_pad/)
 - [True Caller](design_problems/true_caller/)
 - [Subscription Based Sports News](design_problems/subscription_based_sports_news/)
-- [Push Notification System](design_problems/push_notification_system/)
+- [Push Notification System](design_problems/notification_system/)
 - [Social Media Notification System](design_problems/social_media_notification_system/)
 - [Recommendation System](design_problems/recommendation_system/)
 - [Task Management](design_problems/task_management/)
